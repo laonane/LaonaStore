@@ -6,7 +6,11 @@
 	
 	<groupId>wiki.laona</groupId>
 	<artifactId>LaonaStore</artifactId>
+	<packaging>pom</packaging>
 	<version>1.0</version>
+	<modules>
+		<module>common</module>
+	</modules>
 	
 	<!-- 集中定义依赖版本号 -->
 	<properties>
