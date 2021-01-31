@@ -25,3 +25,8 @@ hs_err_pid*
 # IDEA
 .idea/
 out/
+*/target/**
+core/target/
+common/target/
+web-management/target/
+server-seller-goods/target/
