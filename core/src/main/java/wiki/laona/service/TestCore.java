@@ -9,6 +9,7 @@ package wiki.laona.service;
 public interface TestCore {
     /**
      * 测试 core 包
+     *
      * @return
      */
     String getName();

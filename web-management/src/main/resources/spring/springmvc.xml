@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:mvc="http://www.springframework.org/schema/mvc"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
@@ -37,11 +37,11 @@
 	</bean>
 	
 	<!-- 给当前服务起个名 -->
-	<dubbo:application name="laona-store-manager-web" />
+	<dubbo:application name="laona-store-manager-web"/>
 	<!-- 配置连接zookeeper地址  -->
 	<dubbo:registry address="zookeeper://192.168.197.135:2181"/>
 	<!-- 包扫描, 只有在这个包下面才可以用阿里的@Reference注解注入service -->
-	<dubbo:annotation package="wiki.laona.core.controller" />
+	<dubbo:annotation package="wiki.laona.core.controller"/>
 	<!-- 超时全局设置   10分钟   check=false不检查服务提供方-->
 	<dubbo:consumer timeout="600000" check="false"/>
 </beans>

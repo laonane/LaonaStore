@@ -1,5 +1,7 @@
 # LaonaStore - 老衲商城
+
 Java 分布式项（SSM、分布式Dubbo、全文检索Solr、Vue、Zookeeper、文件系统FastDFS、缓存Redis、单点登录CAS，权限控制Spring Security，跨域CORS）
+
 ## 项目说明
 
 - laona商城类似京东商城、天猫商城。网站采用商家入驻的模式
@@ -38,24 +40,24 @@ Java 分布式项（SSM、分布式Dubbo、全文检索Solr、Vue、Zookeeper、
 
 ## 技术选型
 
-1.	后端框架采用 Spring + SpringMVC + MyBatis + DubboX
-2.  Vue 数据请求
-3.	分布式应用程序协调服务 Zookeeper
-4.	分布式文件系统 FastDFS   
-5.	全文检索技术 Solr
-6.	分布式缓存 Redis
-7.  页面静态化
-8.	消息中间件
-9.	权限控制框架 Spring Security
-10.	单点登录框架 CAS
-11.	短信发送
-12.	跨域问题解决方案 CORS
+1. 后端框架采用 Spring + SpringMVC + MyBatis + DubboX
+2. Vue 数据请求
+3. 分布式应用程序协调服务 Zookeeper
+4. 分布式文件系统 FastDFS
+5. 全文检索技术 Solr
+6. 分布式缓存 Redis
+7. 页面静态化
+8. 消息中间件
+9. 权限控制框架 Spring Security
+10. 单点登录框架 CAS
+11. 短信发送
+12. 跨域问题解决方案 CORS
 13. 二维码生成
-14.	微信支付
+14. 微信支付
 
 ## 工程模块
 
-###  基础建设 (等价于 jar 包)
+### 基础建设 (等价于 jar 包)
 
 #### LaonaStore 聚合工程
 
@@ -71,7 +73,7 @@ Java 分布式项（SSM、分布式Dubbo、全文检索Solr、Vue、Zookeeper、
 
 #### DAO 通用数据访问层
 
-通用数据访问层，集合所有表的增/删/改/查， 依赖 POJO 
+通用数据访问层，集合所有表的增/删/改/查， 依赖 POJO
 
 ### 后台建设 (后台服务 war)
 
