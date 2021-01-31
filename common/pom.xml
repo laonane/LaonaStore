@@ -80,14 +80,28 @@
 		<dependency>
 			<groupId>org.apache.curator</groupId>
 			<artifactId>curator-framework</artifactId>
-			<version>4.0.1</version>
+			<version>4.0.0</version>
 			<type>bundle</type>
+			<!-- 4.0.0原生不兼容zk 3.4, 必须进行兼容性处理 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.zookeeper</groupId>
+					<artifactId>zookeeper</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.curator</groupId>
 			<artifactId>curator-recipes</artifactId>
-			<version>4.0.1</version>
+			<version>4.0.0</version>
 			<type>bundle</type>
+			<!-- 4.0.0原生不兼容zk 3.4, 必须进行兼容性处理 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.zookeeper</groupId>
+					<artifactId>zookeeper</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 </project>
