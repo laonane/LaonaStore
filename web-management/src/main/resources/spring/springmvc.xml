@@ -39,7 +39,7 @@
 	<!-- 给当前服务起个名 -->
 	<dubbo:application name="laona-store-manager-web"/>
 	<!-- 配置连接zookeeper地址  -->
-	<dubbo:registry address="zookeeper://192.168.197.135:2181"/>
+	<dubbo:registry address="zookeeper://47.115.112.5:2181"/>
 	<!-- 包扫描, 只有在这个包下面才可以用阿里的@Reference注解注入service -->
 	<dubbo:annotation package="wiki.laona.core.controller"/>
 	<!-- 超时全局设置   10分钟   check=false不检查服务提供方-->
