@@ -24,6 +24,6 @@ public class TestCoreImpl implements TestCore {
         // 从数据库取数据
         List<Brand> brands = brandDao.selectByExample(null);
         System.out.println("brands = " + brands);
-        return "This is server-seller-goods service, Dubbo ~!";
+        return "This is server-seller-goods service, Dubbo ~!<br>laonane";
     }
 }
