@@ -1,5 +1,6 @@
 package wiki.laona.service;
 
+import wiki.laona.core.pojo.entity.PageResult;
 import wiki.laona.core.pojo.good.Brand;
 
 import java.util.List;
@@ -16,4 +17,17 @@ public interface BrandService {
      * @return 品牌信息列表
      */
     List<Brand> findAllBrands();
+
+    /**
+     * 分页查找品牌数据
+     * @param page 当前页码
+     * @param pageSize 每页数据
+     */
+    PageResult<Brand> findPageBrands(Integer page, Integer pageSize);
+
+    /**
+     * 添加品牌
+     * @param brand 品牌
+     */
+    void addBrand(Brand brand);
 }

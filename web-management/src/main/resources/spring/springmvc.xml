@@ -12,6 +12,10 @@
 	<context:component-scan base-package="wiki.laona"/>
 	<!--<context:property-placeholder location="classpath:config/application.properties" />-->
 	
+	<mvc:default-servlet-handler/>
+	<!--静态资源放行-->
+	<mvc:resources mapping="/**" location="/WEB-INF/" />
+	
 	<!-- 注解驱动 -->
 	<mvc:annotation-driven>
 		<!-- 转换器 -->
@@ -26,6 +30,16 @@
 					</array>
 				</property>
 			</bean>
+			<!--<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=utf-8</value>
+						<value>text/html;charset=utf-8</value>
+						&lt;!&ndash; application 可以在任意 form 表单里面 enctype 属性默认找到 &ndash;&gt;
+						<value>application/x-www-form-urlencoded</value>
+					</list>
+				</property>
+			</bean>-->
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	

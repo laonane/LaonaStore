@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import wiki.laona.core.pojo.entity.PageResult;
+import wiki.laona.core.pojo.entity.Result;
+import wiki.laona.core.pojo.entity.ResultCode;
 import wiki.laona.core.pojo.good.Brand;
 import wiki.laona.service.BrandService;
 
@@ -26,5 +29,25 @@ public class BrandController {
     @ResponseBody
     public List<Brand> getBrandList() {
         return brandService.findAllBrands();
+    }
+
+
+    @RequestMapping("/getBrandPageList")
+    @ResponseBody
+    public PageResult<Brand> getBrandPageList(Integer page, Integer pageSize) {
+        return brandService.findPageBrands(page, pageSize);
+    }
+
+    @RequestMapping("/add")
+    @ResponseBody
+    public Result add(@RequestBody Brand brand) {
+        System.out.println("brand = " + brand);
+        try {
+            brandService.addBrand(brand);
+            return new Result(ResultCode.SUCCESS);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new Result(ResultCode.SAVE_FAILED);
+        }
     }
 }
