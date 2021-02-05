@@ -30,4 +30,17 @@ public interface BrandService {
      * @param brand 品牌
      */
     void addBrand(Brand brand);
+
+    /**
+     * 通过 id 获取品牌信息
+     * @param id 品牌 id
+     * @return 品牌信息
+     */
+    Brand getBrandById(Long id);
+
+    /**
+     * 更新品牌信息
+     * @param brand 品牌信息
+     */
+    void updateBrand(Brand brand);
 }

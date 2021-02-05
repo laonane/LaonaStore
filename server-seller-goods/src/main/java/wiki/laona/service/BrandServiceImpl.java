@@ -44,4 +44,14 @@ public class BrandServiceImpl implements BrandService {
         brandDao.insertSelective(brand);
     }
 
+    @Override
+    public Brand getBrandById(Long id) {
+        return brandDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateBrand(Brand brand) {
+        brandDao.updateByPrimaryKeySelective(brand);
+    }
+
 }

@@ -59,10 +59,8 @@
                     <td>{{item.name}}</td>
                     <td>{{item.firstChar}}</td>
                     <td class="text-center">
-                        <button type="button" class="btn bg-olive btn-xs" data-toggle="modal"
-                                data-target="#editModal">
-                            修改
-                        </button>
+                        <button type="button" class="btn bg-olive btn-xs" @click="findById(item.id)"
+                                data-toggle="modal" data-target="#editModal">修改</button>
                     </td>
                 </tr>
                 </tbody>
@@ -95,7 +93,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" @click="brandSave()">保存</button>
+                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" @click="brandSave()">保存
+                    </button>
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
                 </div>
             </div>

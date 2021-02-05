@@ -31,23 +31,48 @@ public class BrandController {
         return brandService.findAllBrands();
     }
 
-
     @RequestMapping("/getBrandPageList")
     @ResponseBody
     public PageResult<Brand> getBrandPageList(Integer page, Integer pageSize) {
-        return brandService.findPageBrands(page, pageSize);
+        // 在这调用 service
+        PageResult<Brand> pageBrands = brandService.findPageBrands(page, pageSize);
+        System.out.println("pageBrands = " + pageBrands);
+        return pageBrands;
     }
 
     @RequestMapping("/add")
     @ResponseBody
     public Result add(@RequestBody Brand brand) {
-        System.out.println("brand = " + brand);
         try {
             brandService.addBrand(brand);
             return new Result(ResultCode.SUCCESS);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return new Result(ResultCode.SAVE_FAILED);
+        }
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public Result update(@RequestBody Brand brand) {
+        try {
+            brandService.updateBrand(brand);
+            return new Result(ResultCode.SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(ResultCode.SAVE_FAILED);
+        }
+    }
+
+    @RequestMapping("/getBrandById")
+    @ResponseBody
+    public Result getBrandById(Long id) {
+        try {
+            Brand brand = brandService.getBrandById(id);
+            return new Result(ResultCode.SUCCESS, brand);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(ResultCode.FAILED);
         }
     }
 }
