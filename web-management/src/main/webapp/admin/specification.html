@@ -10,135 +10,132 @@
     <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="../css/style.css">
-	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <link rel="stylesheet" href="../plugins/pageination/zpageNav.css">
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" >
+<body class="hold-transition skin-red sidebar-mini">
 
-	<div class="box-header with-border" style="height: 64.5px;line-height: 54px;">
-		<h3 class="box-title">规格管理</h3>
-	</div>
-	<div class="box-body">
-		<!-- 数据表格 -->
-		<div class="table-box">
-			<!--工具栏-->
-			<div class="pull-left">
-				<div class="form-group form-inline">
-					<div class="btn-group">
-						<button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ><i class="fa fa-file-o"></i> 新建</button>
-						<button type="button" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button>
-						<button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
-					</div>
-				</div>
-			</div>
-			<div class="box-tools pull-right">
-				<div class="has-feedback">规格名称：<input  >
-					<button class="btn btn-default" >查询</button>
-				</div>
-			</div>
-			<!--数据列表-->
-			<table id="dataList" class="table table-bordered table-striped table-hover dataTable">
-				  <thead>
-					  <tr>
-						  <th class="" style="padding-right:0px">
-							  <input id="selall" type="checkbox" class="icheckbox_square-blue">
-						  </th>
-						  <th class="sorting_asc">规格ID</th>
-						  <th class="sorting">规格名称</th>
-						  <th class="text-center">操作</th>
-					  </tr>
-				  </thead>
-				  <tbody>
-					  <tr >
-						  <td><input  type="checkbox" ></td>
-						  <td>1</td>
-						  <td>颜色</td>
-						  <td class="text-center">
-							  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal">修改</button>
-						  </td>
-					  </tr>
-					  <tr >
-						  <td><input  type="checkbox" ></td>
-						  <td>2</td>
-						  <td>大小</td>
-						  <td class="text-center">
-							  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal">修改</button>
-						  </td>
-					  </tr>
-				  </tbody>
-			</table>
-		</div>
-	</div>
-	<!-- 编辑窗口 -->
-	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" >
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3 id="myModalLabel">规格编辑</h3>
-			</div>
-			<div class="modal-body">
-				<table class="table table-bordered table-striped"  width="800px">
-					<tr>
-						<td>规格名称</td>
-						<td><input  class="form-control" placeholder="规格名称" ></td>
-					</tr>
-				</table>
-				 <!-- 规格选项 -->
-				 <div class="btn-group">
-					  <button type="button" class="btn btn-default" title="新建" >
-						  <i class="fa fa-file-o"></i>
-						  新增规格选项
-					  </button>
-				 </div>
-				 <table class="table table-bordered table-striped table-hover dataTable">
-						<thead>
-						<tr>
-						  <th class="sorting">规格选项</th>
-						  <th class="sorting">排序</th>
-						  <th class="sorting">操作</th>
-						<tr/>
-						</thead>
-						<tbody>
-							<tr>
-							  <td><input  class="form-control" placeholder="规格选项"></td>
-							  <td><input  class="form-control" placeholder="排序"></td>
-							  <td><button type="button" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button></td>
-							</tr>
-							<tr>
-								<td>
-									<input  class="form-control" placeholder="规格选项">
-								</td>
-								<td>
-									<input  class="form-control" placeholder="排序">
-								</td>
-								<td>
-									<button type="button" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button>
-								</td>
-							  </tr>
-							<tr>
-								<td>
-									<input  class="form-control" placeholder="规格选项">
-								</td>
-								<td>
-									<input  class="form-control" placeholder="排序">
-								</td>
-								<td>
-									<button type="button" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button>
-								</td>
-							  </tr>
-						</tbody>
-				  </table>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-success" data-dismiss="modal" aria-hidden="true">保存</button>
-				<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
-			</div>
-		  </div>
-		</div>
-	</div>
-
+<div id="root">
+    <div class="box-header with-border" style="height: 64.5px;line-height: 54px;">
+        <h3 class="box-title">规格管理</h3>
+    </div>
+    <div class="box-body">
+        <!-- 数据表格 -->
+        <div class="table-box">
+            <!--工具栏-->
+            <div class="pull-left">
+                <div class="form-group form-inline">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
+                                data-target="#editModal"><i class="fa fa-file-o"></i> 新建
+                        </button>
+                        <button type="button" class="btn btn-default" title="删除" @click="deleteByIds()"><i class="fa fa-trash-o"></i> 删除
+                        </button>
+                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i
+                                class="fa fa-refresh"></i> 刷新
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="box-tools pull-right">
+                <div class="has-feedback">规格名称：<input v-model="searchSpec.specName">
+                    <button class="btn btn-default" @click="pageHandler(1)">查询</button>
+                </div>
+            </div>
+            <!--数据列表-->
+            <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                <thead>
+                <tr>
+                    <th class="" style="padding-right:0px">
+                        <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                    </th>
+                    <th class="sorting_asc">规格ID</th>
+                    <th class="sorting">规格名称</th>
+                    <th class="text-center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item, index) in specList">
+                    <td><input type="checkbox" @click="deleteSelect($event, item.id)"></td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.specName}}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"
+                                @click="findById(item.id)">
+                            修改
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--分页-->
+    <zpagenav v-bind:page="page" v-bind:page-size="pageSize" v-bind:total="total"
+              v-bind:max-page="maxPage" v-on:pagehandler="pageHandler">
+    </zpagenav>
+    <!-- 编辑窗口 -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">规格编辑</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped" width="800px">
+                        <tr>
+                            <td>规格名称</td>
+                            <td><input class="form-control" placeholder="规格名称" v-model="specEntity.spec.specName"></td>
+                        </tr>
+                    </table>
+                    <!-- 规格选项 -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" title="新建" @click="addRow()">
+                            <i class="fa fa-file-o"></i>
+                            新增规格选项
+                        </button>
+                    </div>
+                    <table class="table table-bordered table-striped table-hover dataTable">
+                        <thead>
+                        <tr>
+                            <th class="sorting">规格选项</th>
+                            <th class="sorting">排序</th>
+                            <th class="sorting">操作</th>
+                        <tr/>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(item, index) in specEntity.specOption">
+                            <td>
+                                <input class="form-control" placeholder="规格选项" v-model="item.optionName">
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="排序"  v-model="item.orders">
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-default" title="删除" @click="removeRow(index)"><i class="fa fa-trash-o"></i>
+                                    删除
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" @click="saveSpecEntity()">保存</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-
+<script src="../plugins/vue/vuejs-2.5.16.js"></script>
+<script src="../plugins/vue/axios-0.18.0.js"></script>
+<script src="../js/specification.js"></script>
+<script src="../plugins/vue/qs.js"></script>
+<script type="text/javascript" src="../plugins/pageination/zpageNav.js"></script>
 </html>

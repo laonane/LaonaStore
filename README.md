@@ -113,6 +113,28 @@ Solr
 
 运营管理后台
 
+##### 品牌管理
+- 添加品牌
+```http request
+/brand/add.do
+```
+- 更新品牌
+```http request
+/brand/update.do
+```
+- 删除品牌
+```http request
+/brand/delete.do
+```
+- 品牌搜索
+```http request
+/brand/getBrandPageList.do
+```
+
+##### 规格管理
+
+TODO:// 商品规格管理
+
 #### Portal 网站门户
 
 网站门户

@@ -35,10 +35,11 @@ public class BrandServiceImpl implements BrandService {
     public PageResult<Brand> findPageBrands(Integer page, Integer pageSize, Brand brand) {
         PageHelper.startPage(page, pageSize);
         BrandQuery brandQuery = new BrandQuery();
-        BrandQuery.Criteria criteria = brandQuery.createCriteria();
         // 模糊查询
         if (brand != null) {
+            BrandQuery.Criteria criteria = brandQuery.createCriteria();
             if (!Strings.isNullOrEmpty(brand.getFirstChar())) {
+                // 需要加上 %%
                 criteria.andFirstCharLike("%" + brand.getFirstChar() + "%");
             }
             if (!Strings.isNullOrEmpty(brand.getName())) {

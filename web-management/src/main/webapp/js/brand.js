@@ -17,6 +17,10 @@ new Vue({
         },
     },
     methods: {
+        /**
+         * 分页处理
+         * @param page
+         */
         pageHandler: function (page) {
             this.page = page;
             let _this = this;
