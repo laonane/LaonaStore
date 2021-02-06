@@ -11,6 +11,7 @@ import wiki.laona.core.pojo.entity.ResultCode;
 import wiki.laona.core.pojo.good.Brand;
 import wiki.laona.service.BrandService;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,11 +34,9 @@ public class BrandController {
 
     @RequestMapping("/getBrandPageList")
     @ResponseBody
-    public PageResult<Brand> getBrandPageList(Integer page, Integer pageSize) {
-        // 在这调用 service
-        PageResult<Brand> pageBrands = brandService.findPageBrands(page, pageSize);
-        System.out.println("pageBrands = " + pageBrands);
-        return pageBrands;
+    public PageResult<Brand> getBrandPageList(Integer page, Integer pageSize, @RequestBody Brand brand) {
+        System.out.println("brand = " + brand);
+        return brandService.findPageBrands(page, pageSize, brand);
     }
 
     @RequestMapping("/add")
@@ -70,6 +69,19 @@ public class BrandController {
         try {
             Brand brand = brandService.getBrandById(id);
             return new Result(ResultCode.SUCCESS, brand);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(ResultCode.FAILED);
+        }
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result deleteBrandByIds(Long[] ids) {
+        System.out.println("ids = " + Arrays.toString(ids));
+        try {
+            brandService.deleteBrandByIds(ids);
+            return new Result(ResultCode.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(ResultCode.FAILED);

@@ -3,6 +3,7 @@ package wiki.laona.service;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import wiki.laona.core.dao.good.BrandDao;
@@ -10,6 +11,7 @@ import wiki.laona.core.pojo.entity.PageResult;
 import wiki.laona.core.pojo.good.Brand;
 import wiki.laona.core.pojo.good.BrandQuery;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,9 +32,19 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public PageResult<Brand> findPageBrands(Integer page, Integer pageSize) {
+    public PageResult<Brand> findPageBrands(Integer page, Integer pageSize, Brand brand) {
         PageHelper.startPage(page, pageSize);
         BrandQuery brandQuery = new BrandQuery();
+        BrandQuery.Criteria criteria = brandQuery.createCriteria();
+        // 模糊查询
+        if (brand != null) {
+            if (!Strings.isNullOrEmpty(brand.getFirstChar())) {
+                criteria.andFirstCharLike("%" + brand.getFirstChar() + "%");
+            }
+            if (!Strings.isNullOrEmpty(brand.getName())) {
+                criteria.andNameLike("%" + brand.getName() + "%");
+            }
+        }
         // 结果按照 id 降序排序（最后添加在最前面）
         brandQuery.setOrderByClause("id desc");
         Page<Brand> pageInfo = (Page<Brand>) brandDao.selectByExample(brandQuery);
@@ -52,6 +64,14 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void updateBrand(Brand brand) {
         brandDao.updateByPrimaryKeySelective(brand);
+    }
+
+    @Override
+    public void deleteBrandByIds(Long[] ids) {
+        BrandQuery brandQuery = new BrandQuery();
+        BrandQuery.Criteria criteria = brandQuery.createCriteria();
+        criteria.andIdIn(Arrays.asList(ids));
+        brandDao.deleteByExample(brandQuery);
     }
 
 }

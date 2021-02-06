@@ -28,11 +28,19 @@
                         <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
                                 data-target="#editModal"><i class="fa fa-file-o"></i> 新建
                         </button>
-                        <button type="button" class="btn btn-default" title="删除"><i class="fa fa-trash-o"></i> 删除
+                        <button type="button" class="btn btn-default" title="删除" @click="deleteBrands()"><i
+                                class="fa fa-trash-o"></i> 删除
                         </button>
                         <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i
                                 class="fa fa-refresh"></i> 刷新
                         </button>
+                    </div>
+                    <div class="box-tools pull-right">
+                        <div class="has-feedback" style="margin-left: 50px; font-size: 16px;">
+                            品牌名称：<input type="text" class="form-control" v-model="searchBrand.name">
+                            品牌首字母：<input type="text" class="form-control" v-model="searchBrand.firstChar">
+                            <input type="button" class="btn btn-default" value="查询" @click="pageHandler(1)">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,13 +62,14 @@
                 </thead>
                 <tbody>
                 <tr v-for="(item, index) in brandList">
-                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox" @click="deleteSelect($event,item.id)"></td>
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.firstChar}}</td>
                     <td class="text-center">
                         <button type="button" class="btn bg-olive btn-xs" @click="findById(item.id)"
-                                data-toggle="modal" data-target="#editModal">修改</button>
+                                data-toggle="modal" data-target="#editModal">修改
+                        </button>
                     </td>
                 </tr>
                 </tbody>
@@ -105,5 +114,6 @@
 <script src="../plugins/vue/vuejs-2.5.16.js"></script>
 <script src="../plugins/vue/axios-0.18.0.js"></script>
 <script src="../js/brand.js"></script>
+<script src="../plugins/vue/qs.js"></script>
 <script type="text/javascript" src="../plugins/pageination/zpageNav.js"></script>
 </html>
