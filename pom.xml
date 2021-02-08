@@ -39,6 +39,7 @@
 		<solrj.version>4.10.3</solrj.version>
 		<ik.version>2012_u6</ik.version>
 		<spring.security.version>5.0.1.RELEASE</spring.security.version>
+		<com.fasterxml.jackson.version>2.12.0</com.fasterxml.jackson.version>
 	</properties>
 	
 	<!--
@@ -243,6 +244,23 @@
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<version>1.18.12</version>
+			</dependency>
+			
+			<!-- jackson json -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

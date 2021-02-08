@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	
+	<!--放行静态资源-->
+	<security:http pattern="/css/**" security="none"/>
+	<security:http pattern="/img/**" security="none"/>
+	<security:http pattern="/js/**" security="none"/>
+	<security:http pattern="/plugins/**" security="none"/>
+	<security:http pattern="/login.html" security="none"/>
+	<security:http pattern="**/favicon.ico" security="none"/>
+	
+	<!--
+		配置拦截的规则
+		auto-config="使用自带的页面"
+		use-expressions="是否使用spel表达式"，
+		如果使用表达式：hasRole('ROLE_USER')
+	-->
+	<security:http auto-config="true" use-expressions="false">
+		<!--
+			配置SpringSecurity的拦截路径（拦截规则）
+			* pattern:配置拦截规则。
+			/* 代表的是根路径下的所有资源（不包含子路径）
+			/**代表的是根路径下所有的资源（包含子路径）
+			* access:设置角色  角色命名 ROLE_角色名称  如：  ROLE_USER
+		-->
+		<security:intercept-url pattern="/**" access="ROLE_ADMIN"/>
+		
+		<!--
+			开启表单验证
+				username-parameter="username"
+				password-parameter="password"
+				login-page			:登录页面名称  以  / 开始
+				default-target-url	:登录成功后跳转的页面
+				login-processing-url:提交的路径的设置 默认值"/login" 可以修改
+		-->
+		<security:form-login login-page="/login.html"
+		                     default-target-url="/admin/index.html"
+		                     always-use-default-target="true"
+		                     authentication-failure-url="/login.html"/>
+		
+		<!-- 不使用csrf的校验 -->
+		<security:csrf disabled="true"/>
+		
+		<!-- 配置框架页面不拦截 ,
+		这个配置是设置html页面中可以使用html的iframe标签和frame标签-->
+		<security:headers>
+			<security:frame-options policy="SAMEORIGIN"/>
+		</security:headers>
+		<!--
+			退出
+			 invalidate-session:是否刷新session
+			 logout-url:退出请求地址
+			 logout-success-url:退出成功后访问的页面
+		 -->
+		<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/login.html"/>
+	</security:http>
+	
+	<!-- 配置认证信息 -->
+	<security:authentication-manager>
+		<!--认证信息的提供者-->
+		<security:authentication-provider>
+			<!--用户的服务对象-->
+			<security:user-service>
+				<!--用户信息, 是临时账号和密码-->
+				<!--noop:不使用加密  authorities:指定用户认证的角色-->
+				<security:user name="admin" password="{noop}123" authorities="ROLE_USER"/>
+				<security:user name="laona" password="{noop}123" authorities="ROLE_ADMIN"/>
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>
