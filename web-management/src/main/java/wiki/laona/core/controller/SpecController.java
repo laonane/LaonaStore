@@ -12,6 +12,9 @@ import wiki.laona.core.pojo.entity.SpecificationEntity;
 import wiki.laona.core.pojo.specification.Specification;
 import wiki.laona.service.SpecificationService;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @description: 规格管理 controller
  * @author: laona
@@ -31,6 +34,12 @@ public class SpecController {
             Integer pageSize,
             @RequestBody Specification specification) {
         return specificationService.findSpecPageList(page, pageSize, specification);
+    }
+
+    @RequestMapping("/getSpecMap")
+    @ResponseBody
+    public List<Map> getSpecMap() {
+        return specificationService.getSpecMap();
     }
 
     @RequestMapping("/getSpecById")

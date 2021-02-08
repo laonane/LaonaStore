@@ -136,6 +136,10 @@
 			<include refid="Example_Where_Clause"/>
 		</if>
 	</select>
+	<!--获取规格下拉数据-->
+	<select id="findAllSpecificationsMap" resultType="java.util.Map">
+		select id, spec_name from tb_specification
+	</select>
 	<update id="updateByExampleSelective" parameterType="map">
 		update tb_specification
 		<set>

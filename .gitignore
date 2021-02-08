@@ -31,6 +31,7 @@ common/target/
 web-management/target/
 server-seller-goods/target/
 **/rebel.xml
+*/rebel.xml
 server-seller-goods/src/main/resources/rebel.xml
 web-management/src/main/resources/rebel.xml
 *.iml

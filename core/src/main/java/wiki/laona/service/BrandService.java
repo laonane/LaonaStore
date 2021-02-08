@@ -4,6 +4,7 @@ import wiki.laona.core.pojo.entity.PageResult;
 import wiki.laona.core.pojo.good.Brand;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 品牌服务
@@ -55,4 +56,12 @@ public interface BrandService {
      * @param ids id集合
      */
     void deleteBrandByIds(Long[] ids);
+
+    /**
+     * 查询所有品牌信息 {"id": 1, "name": "apple"}
+     *
+     * @return [{"id": 1, "name": "apple"}]
+     */
+    List<Map> findAllBrandsMap();
+
 }

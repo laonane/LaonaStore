@@ -17,6 +17,7 @@ import wiki.laona.core.pojo.specification.SpecificationQuery;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 规格服务实现类
@@ -102,5 +103,10 @@ public class SpecificationServiceImpl implements SpecificationService {
         });
         // 更新规格信息
         specificationDao.updateByPrimaryKeySelective(spec);
+    }
+
+    @Override
+    public List<Map> getSpecMap() {
+        return specificationDao.findAllSpecificationsMap();
     }
 }

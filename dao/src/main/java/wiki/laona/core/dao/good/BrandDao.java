@@ -5,6 +5,7 @@ import wiki.laona.core.pojo.good.Brand;
 import wiki.laona.core.pojo.good.BrandQuery;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BrandDao {
     int countByExample(BrandQuery example);
@@ -28,4 +29,10 @@ public interface BrandDao {
     int updateByPrimaryKeySelective(Brand record);
 
     int updateByPrimaryKey(Brand record);
+
+    /**
+     * 获取品牌下拉列表的值
+     * @return
+     */
+    List<Map> selectBrandOptionMap();
 }

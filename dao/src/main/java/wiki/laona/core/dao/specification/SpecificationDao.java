@@ -5,6 +5,7 @@ import wiki.laona.core.pojo.specification.Specification;
 import wiki.laona.core.pojo.specification.SpecificationQuery;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SpecificationDao {
     int countByExample(SpecificationQuery example);
@@ -28,4 +29,10 @@ public interface SpecificationDao {
     int updateByPrimaryKeySelective(Specification record);
 
     int updateByPrimaryKey(Specification record);
+
+    /**
+     * 获取规格下拉数据
+     * @return
+     */
+    List<Map> findAllSpecificationsMap();
 }

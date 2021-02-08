@@ -87,7 +87,6 @@ new Vue({
                 // 删除集合中对应id
                 this.selectedSpecIds.splice(index, 1);
             }
-            console.log(this.selectedSpecIds);
         },
         /**
          * 删除按钮事件点击

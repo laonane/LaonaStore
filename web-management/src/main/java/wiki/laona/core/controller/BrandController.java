@@ -13,6 +13,7 @@ import wiki.laona.service.BrandService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 品牌控制器
@@ -32,10 +33,15 @@ public class BrandController {
         return brandService.findAllBrands();
     }
 
+    @RequestMapping("/getBrandMap")
+    @ResponseBody
+    public List<Map> getBrandMap() {
+        return brandService.findAllBrandsMap();
+    }
+
     @RequestMapping("/getBrandPageList")
     @ResponseBody
     public PageResult<Brand> getBrandPageList(Integer page, Integer pageSize, @RequestBody Brand brand) {
-        System.out.println("brand = " + brand);
         return brandService.findPageBrands(page, pageSize, brand);
     }
 
@@ -78,7 +84,6 @@ public class BrandController {
     @RequestMapping("/delete")
     @ResponseBody
     public Result deleteBrandByIds(Long[] ids) {
-        System.out.println("ids = " + Arrays.toString(ids));
         try {
             brandService.deleteBrandByIds(ids);
             return new Result(ResultCode.SUCCESS);

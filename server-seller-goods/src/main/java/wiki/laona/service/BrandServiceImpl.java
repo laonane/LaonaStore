@@ -13,6 +13,7 @@ import wiki.laona.core.pojo.good.BrandQuery;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 品牌信息服务实现类
@@ -73,6 +74,11 @@ public class BrandServiceImpl implements BrandService {
         BrandQuery.Criteria criteria = brandQuery.createCriteria();
         criteria.andIdIn(Arrays.asList(ids));
         brandDao.deleteByExample(brandQuery);
+    }
+
+    @Override
+    public List<Map> findAllBrandsMap() {
+        return brandDao.selectBrandOptionMap();
     }
 
 }

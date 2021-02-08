@@ -4,6 +4,9 @@ import wiki.laona.core.pojo.entity.PageResult;
 import wiki.laona.core.pojo.entity.SpecificationEntity;
 import wiki.laona.core.pojo.specification.Specification;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @description: 规格服务接口
  * @author: laona
@@ -44,5 +47,11 @@ public interface SpecificationService {
      * @param entity 规格实体
      */
     void updateSpecEntity(SpecificationEntity entity);
+
+    /**
+     * 获取规格下拉数据
+     * @return
+     */
+    List<Map> getSpecMap();
 
 }
