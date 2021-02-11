@@ -15,6 +15,7 @@
 		<module>web-management</module>
 		<module>pojo</module>
 		<module>dao</module>
+		<module>web-shop</module>
 	</modules>
 	
 	<!-- 集中定义依赖版本号 -->

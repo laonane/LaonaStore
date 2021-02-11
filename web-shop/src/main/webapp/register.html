@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <title>入驻申请</title>
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/webbase.css"/>
+    <link rel="stylesheet" type="text/css" href="css/pages-register.css"/>
+</head>
+
+<body>
+<div id="root">
+    <div class="register py-container ">
+        <!--头部-->
+        <div style="width: 100%; height: 90px; padding-top: 10px; padding-left: 5px;">
+            <img src="img/logo.png" alt="" width="80" height="80" style="float:left; margin-right: 10px;">
+            <div style="color: dimgrey; font-size: 25px;margin: 30px 0 0 50px;">欢迎入驻</div>
+        </div>
+
+        <div class="registerArea">
+            <h3>入驻申请<span class="go">我有账号，去<a href="shoplogin.html" target="_blank">登陆</a></span></h3>
+            <div class="info">
+                <form class="sui-form form-horizontal">
+
+                    <div class="control-group">
+                        <label class="control-label">登陆名（不可修改）：</label>
+                        <div class="controls">
+                            <input type="text" v-model="enterprise.sellerId" placeholder="登陆名"
+                                   class="input-xfat input-xlarge">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">登陆密码：</label>
+                        <div class="controls">
+                            <input type="password" v-model="enterprise.password" placeholder="登陆密码"
+                                   class="input-xfat input-xlarge">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">店铺名称：</label>
+                        <div class="controls">
+                            <input type="text" v-model="enterprise.nickName" placeholder="店铺名称"
+                                   class="input-xfat input-xlarge">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">公司名称：</label>
+                        <div class="controls">
+                            <input type="text" v-model="enterprise.name" placeholder="公司名称" class="input-xfat input-xlarge">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">公司电话：</label>
+                        <div class="controls">
+                            <input type="text" v-model="enterprise.telephone" placeholder="公司电话"
+                                   class="input-xfat input-xlarge">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">公司详细地址：</label>
+                        <div class="controls">
+                            <input type="text" v-model="enterprise.addressDetail" placeholder="公司详细地址"
+                                   class="input-xfat input-xlarge">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">联系人姓名：</label>
+                        <div class="controls">
+                            <input type="text" v-model="enterprise.linkmanName" placeholder="联系人姓名"
+                                   class="input-xfat input-xlarge">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">联系人QQ：</label>
+                        <div class="controls">
+                            <input type="text" v-model="enterprise.linkmanQq" placeholder="联系人QQ"
+                                   class="input-xfat input-xlarge">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">联系人手机：</label>
+                        <div class="controls">
+                            <input type="text" v-model="enterprise.linkmanMobile" placeholder="联系人手机"
+                                   class="input-xfat input-xlarge">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">联系人EMAIL：</label>
+                        <div class="controls">
+                            <input type="text" v-model="enterprise.linkmanEmail" placeholder="联系人EMAIL"
+                                   class="input-xfat input-xlarge">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <div class="controls">
+                            <input name="m1" type="checkbox" value="2" checked=""><span>同意协议并注册  <a href="sampling.html">《品优购商家入驻协议》</a></span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls btn-reg">
+                            <a class="sui-btn btn-block btn-xlarge btn-danger" target="_blank"
+                               @click="applySettle()">申请入驻</a>
+                        </div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="py-container copyright">
+            <ul>
+                <li>关于我们</li>
+                <li>联系我们</li>
+                <li>人才招聘</li>
+                <li>商家入驻</li>
+                <li>广告服务</li>
+                <li>友情链接</li>
+                <li>销售联盟</li>
+                <li>商家社区</li>
+            </ul>
+            <div class="beian">Copyright © 2004-2019 laona.wiki 版权所有</div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="plugins/vue/vuejs-2.5.16.js"></script>
+<script src="plugins/vue/axios-0.18.0.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: "#root",
+        data: {
+            enterprise: {}          /*入驻企业信息*/
+        }, methods: {
+            /**
+             * 申请入驻按钮点击事件
+             */
+            applySettle: function () {
+                axios.post("/seller/add.do", this.enterprise).then(function (res) {
+                    let data = res.data;
+                    if (data.code === 1) {
+                        alert(data.data);
+                    } else {
+                        alert(data.message);
+                    }
+                }).catch(function (err) {
+                    console.log(err);
+                })
+            },
+        }, created: function () {
+
+        }
+    });
+</script>
+
+</html>

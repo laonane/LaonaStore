@@ -35,6 +35,7 @@ public class Seller implements Serializable {
     private String telephone;
     /**
      * 状态
+     * 0待审核，1通过审核，2审核未通过，3该商户已注销
      */
     private String status;
     /**

@@ -70,7 +70,7 @@
 			<security:user-service>
 				<!--用户信息, 是临时账号和密码-->
 				<!--noop:不使用加密  authorities:指定用户认证的角色-->
-				<security:user name="admin" password="{noop}123" authorities="ROLE_USER"/>
+				<security:user name="admin" password="{noop}123" authorities="ROLE_ADMIN"/>
 				<security:user name="laona" password="{noop}123" authorities="ROLE_ADMIN"/>
 			</security:user-service>
 		</security:authentication-provider>
