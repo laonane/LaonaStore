@@ -2,19 +2,16 @@ package wiki.laona.core.service;
 
 import com.google.common.base.Strings;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import wiki.laona.core.pojo.seller.Seller;
 import wiki.laona.service.SellerService;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * @description: UserDetailService实现类
@@ -40,14 +37,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         ArrayList<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_SELLER"));
         // 认证
-        if (Strings.isNullOrEmpty(username)){
+        if (Strings.isNullOrEmpty(username)) {
             return null;
         }
         // 查询商家是否存在
         Seller seller = sellerService.findUser(username);
-        System.out.println("username = " + username);
-        System.out.println("seller = " + seller);
-        if (!Objects.isNull(seller) && STATUS_ACTIVE.equals(seller.getStatus())) {
+        if (seller != null && STATUS_ACTIVE.equals(seller.getStatus())) {
             // 返回用户名、密码、所有权限的用户信息集合
             // {noop} 表示不需要验证（不加密）
             // return new User(username, "{noop}" + seller.getPassword(), authorities);
