@@ -4,8 +4,8 @@ new Vue({
         categoryList: {},    /*分类列表*/
         selectedItemCateIds: [],      /*选中分类列表*/
         grade: 1,                   /*面包屑级别*/
-        gradeEntity1: {},
-        gradeEntity2: {},
+        gradeEntity1: {},               /*二级目录*/
+        gradeEntity2: {},               /*三级目录*/
     }, methods: {
         /**
          * 获取父分类
@@ -42,18 +42,25 @@ new Vue({
          * @param item
          */
         getNextGrade: function (item) {
+            console.log("grade旧值", this.grade);
             let _this = this;
             // console.table(item);
             if (_this.grade === 1) {
-                _this.gradeEntity1 = null;
-                _this.gradeEntity2 = null;
+                _this.gradeEntity1 = {};
+                _this.gradeEntity2 = {};
             }
             if (_this.grade === 2) {
                 _this.gradeEntity1 = item;
-                _this.gradeEntity2 = null;
+                _this.gradeEntity2 = {};
+                for (let val in _this.gradeEntity1) {
+                    console.log(val, " = ", item[val]);
+                }
             }
             if (_this.grade === 3) {
                 _this.gradeEntity2 = item;
+                for (let val in _this.gradeEntity2) {
+                    console.log(val, " = ", item[val]);
+                }
             }
             _this.getItemCategoryByParentId(item.id);
         },
@@ -67,15 +74,19 @@ new Vue({
     }, created: function () {
         this.getItemCategoryByParentId(0);
     },
-    watch: {
+/*    watch: {
         grade(newValue, oldValue) {
             console.log("grade新值: id=", newValue.id, " name=", newValue.name, "grade旧值", oldValue);
         },
         gradeEntity1(newValue, oldValue) {
-            console.log("gradeEntity1新值: id=", newValue.id, " name=", newValue.name, "id=", oldValue.id, " name=", oldValue.name);
+            if (newValue != null) {
+                console.log("gradeEntity1新值: id=", newValue.id, " name=", newValue.name, "id=", oldValue.id, " name=", oldValue.name);
+            }
         },
         gradeEntity2(newValue, oldValue) {
-            console.log("gradeEntity2新值: id=", newValue.id, " name=", newValue.name, "id=", oldValue.id, " name=", oldValue.name);
+            if (newValue != null) {
+                console.log("gradeEntity2新值: id=", newValue.id, " name=", newValue.name, "id=", oldValue.id, " name=", oldValue.name);
+            }
         },
-    }
+    }*/
 });

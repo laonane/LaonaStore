@@ -23,13 +23,13 @@
     <div class="box-body">
         <ol class="breadcrumb">
             <li>
-                <a href="#" @click="setGradeNum(1);getNextGrade({id:0});">顶级分类列表</a>
+                <a href="#" @click="grade=1;getNextGrade({id:0});">顶级分类列表</a>
             </li>
             <li>
-                <a href="#" @click="setGradeNum(2);getNextGrade(gradeEntry1);">{{gradeEntity1.name}}</a>
+                <a href="#" @click="grade=2;getNextGrade(gradeEntity1);">{{gradeEntity1.name}}</a>
             </li>
             <li>
-                <a href="#" @click="setGradeNum(3);getNextGrade(gradeEntry2);">{{gradeEntity2.name}}</a>
+                <a href="#" @click="grade=3;getNextGrade(gradeEntity2);">{{gradeEntity2.name}}</a>
             </li>
         </ol>
         <!-- 数据表格 -->
