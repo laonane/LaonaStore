@@ -18,4 +18,11 @@ public interface ItemCategoryService {
      * @return 条目分页数据
      */
     List<ItemCat> findItemPageList(Long parentId);
+
+    /**
+     * 根据 id 查询分类
+     * @param id 模板id
+     * @return 分类
+     */
+    ItemCat findItemCategoryById(Long id);
 }

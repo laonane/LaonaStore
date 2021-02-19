@@ -36,4 +36,9 @@ public class ItemCategoryCategoryServiceImpl implements ItemCategoryService {
         }
         return itemCatDao.selectByExample(itemCatQuery);
     }
+
+    @Override
+    public ItemCat findItemCategoryById(Long id) {
+        return itemCatDao.selectByPrimaryKey(id);
+    }
 }
