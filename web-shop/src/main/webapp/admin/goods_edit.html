@@ -112,7 +112,7 @@
 
                             <div class="col-md-2 title editer">商品介绍</div>
                             <div class="col-md-10 data editer">
-                                <div id="editor" name="article_content" style="width:1337px; height: 320px;"></div>
+                                <div id="editor" name="article_content" style="width:100%; height: 320px;"></div>
                             </div>
 
                             <div class="col-md-2 title rowHeight2x">包装列表</div>
@@ -308,5 +308,11 @@
 <script src="../plugins/vue/axios-0.18.0.js"></script>
 <script src="../plugins/vue/qs.js"></script>
 <script src="../js/goods_edit.js"></script>
+<script type="text/javascript">
+    //初始化富文本编程器
+    var ue = UE.getEditor('editor');
+    ue.ready(function () {
 
+    });
+</script>
 </html>

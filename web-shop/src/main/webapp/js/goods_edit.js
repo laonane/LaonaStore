@@ -60,11 +60,6 @@ new Vue({
             }
         }
     }, created: function () {
-        //初始化富文本编程器
-        var ue = UE.getEditor('editor');
-        ue.ready(function () {
-
-        });
         this.loadCategoryDate(0);
     },
     /**
