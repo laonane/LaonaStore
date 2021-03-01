@@ -11,6 +11,11 @@ new Vue({
         typeId: 0,               /*模板id*/
         selectBrand: -1,            /*选择品牌序号*/
         brandList: [],              /*品牌列表*/
+        curImageObj: {                /*图片上传对象*/
+            color: '',
+            url: ''
+        },
+        imageList: [],               /*图片上传列表*/
     }, methods: {
         /**
          * 加载商品分类下拉列表
@@ -63,17 +68,56 @@ new Vue({
          * 图片上传
          */
         uploadFile: function () {
-            let FormData = new FormData();
-            FormData.append("file", file.files[0]);
+            let formData = new FormData();
+            let _this = this;
+            formData.append("file", file.files[0]);
             // 打开 axios 的凭证信息
-            let instance = axios.created({
+            let instance = axios.create({
                 withCredentials: true
-            })
-            axios.post("/upload/uploadFile.do", FormData).then(function (res) {
-                console.log(res.data);
+            });
+            axios.post("/upload/uploadFile.do", formData).then(function (res) {
+                res = res.data;
+                _this.curImageObj.url = res.data;
+                // console.log(_this.curImageObj.url);
             }).catch(function (err) {
                 console.log(err);
-            })
+            });
+        },
+        /**
+         * 保存图片
+         */
+        saveImage: function () {
+            console.log("保存图片");
+            if (this.curImageObj.color === '' || this.curImageObj.url === '') {
+                alert("请输入颜色或者上传你的图片");
+                return;
+            }
+            // 双向绑定不能直接 push curImageObj 对象，因为会动态变化
+            let obj = {
+                color: this.curImageObj.color,
+                url: this.curImageObj.url
+            };
+            this.imageList.push(obj);
+        },
+        /**
+         * 删除图片
+         */
+        deleteImg: function (delUrl, index) {
+            let _this = this;
+            // 从服务器删除该地址
+            axios.get("/upload/deleteImage.do?url=" + delUrl).then(function (res) {
+                // 移除 imageList 数据
+                res = res.data;
+                if (res.code === 1) {
+                    // 切片删除
+                    _this.imageList.splice(index, 1);
+                } else {
+                    alert(res.data);
+                }
+            }).catch(function (err) {
+                console.log(err);
+            });
+
         }
     }, created: function () {
         this.loadCategoryDate(0);
@@ -86,13 +130,14 @@ new Vue({
             let _this = this;
             _this.selectBrand = -1;
             _this.brandList = [];
-            console.log(newVal);
             axios.post("/temp/getTempById.do?id=" + newVal).then(function (res) {
                 res = res.data;
                 _this.brandList = JSON.parse(res.data.brandIds);
             }).catch(function (err) {
                 console.log(err);
-            })
+            });
+            //TODO 加载规格与规格选项
+
         }
     }
 })

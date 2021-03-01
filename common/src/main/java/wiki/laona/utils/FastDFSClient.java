@@ -31,7 +31,7 @@ public class FastDFSClient {
      * @param file 文件二进制
      * @param fileName 文件名
      * @param fileSize 文件大小
-     * @return
+     * @return 上传成功后的路径（相对路径）
      * @throws Exception
      */
     public String uploadFile(byte[] file, String fileName, long fileSize) throws Exception {
@@ -40,8 +40,8 @@ public class FastDFSClient {
         metas[0] = new NameValuePair("fileName", fileName);
         metas[1] = new NameValuePair("fileSize", String.valueOf(fileSize));
         metas[2] = new NameValuePair("fileExt", FilenameUtils.getExtension(fileName));
-        String result = storageClient.upload_file1(file, FilenameUtils.getExtension(fileName), metas);
-        return result;
+        String path = storageClient.upload_file1(file, FilenameUtils.getExtension(fileName), metas);
+        return path;
     }
 
     /**
@@ -50,7 +50,7 @@ public class FastDFSClient {
      * @return -1失败,0成功
      * @throws Exception
      */
-    public Integer delete_file(String storagePath){
+    public Integer deleteFile(String storagePath){
         int result=-1;
         try {
             result = storageClient.delete_file1(storagePath);

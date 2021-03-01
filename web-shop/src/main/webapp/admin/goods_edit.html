@@ -76,7 +76,7 @@
                                             </select>
                                         </td>
                                         <td v-if="typeId!=-1">
-                                             模板ID: {{typeId}}
+                                            模板ID: {{typeId}}
                                         </td>
                                     </tr>
                                 </table>
@@ -145,13 +145,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td></td>
+                                <tr v-for="(item, index) in imageList">
+                                    <td>{{item.color}}</td>
                                     <td>
-                                        <img alt="" src="" width="100px" height="100px">
+                                        <img alt="" :src="item.url" width="100px" height="100px">
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-default" title="删除"><i
+                                        <button type="button" @click="deleteImg(item.url, index);" class="btn btn-default" title="删除"><i
                                                 class="fa fa-trash-o"></i> 删除
                                         </button>
                                     </td>
@@ -273,7 +273,7 @@
                     <table class="table table-bordered table-striped">
                         <tr>
                             <td>颜色</td>
-                            <td><input class="form-control" placeholder="颜色"></td>
+                            <td><input class="form-control" v-model="curImageObj.color" placeholder="颜色"></td>
                         </tr>
                         <tr>
                             <td>图片</td>
@@ -282,20 +282,21 @@
                                     <tr>
                                         <td>
                                             <input type="file" id="file"/>
-                                            <button class="btn btn-primary" @click="uploadFile()" type="button" style="margin-top: 10px;">上传
+                                            <button class="btn btn-primary" @click="uploadFile();" type="button"
+                                                    style="margin-top: 10px;">上传
                                             </button>
                                         </td>
                                         <td>
-                                            <img src="#" width="200px" height="200px" alt=""/>
+                                            <img :src="curImageObj.url" width="200px" height="200px" alt=""/>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
-                        </tr>
+                        </tr>10
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">保存</button>
+                    <button class="btn btn-success" @click="saveImage()" data-dismiss="modal">保存</button>
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
                 </div>
             </div>
@@ -311,8 +312,18 @@
 <script type="text/javascript">
     //初始化富文本编程器
     var ue = UE.getEditor('editor');
+    /**
+     * 上传图片拦截
+     */
     ue.ready(function () {
-
+        UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+        UE.Editor.prototype.getActionUrl = function (action) {
+            if (action === 'upload/uploadImage.do') {
+                return "http://localhost:8083/upload/uploadImage.do";
+            } else {
+                return this._bkGetActionUrl.call(this, action);
+            }
+        };
     });
 </script>
 </html>
