@@ -263,6 +263,13 @@
 				<artifactId>jackson-annotations</artifactId>
 				<version>${com.fasterxml.jackson.version}</version>
 			</dependency>
+			
+			<!--fastDFS-->
+			<dependency>
+				<groupId>org.csource.fastdfs</groupId>
+				<artifactId>fastdfs</artifactId>
+				<version>1.2</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

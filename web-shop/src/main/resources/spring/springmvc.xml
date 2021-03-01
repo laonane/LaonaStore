@@ -8,6 +8,8 @@
         http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
+	<context:property-placeholder location="classpath:properties/application.properties" />
+	
 	<!--注解扫描-->
 	<context:component-scan base-package="wiki.laona"/>
 	<!--<context:property-placeholder location="classpath:config/application.properties" />-->

@@ -58,6 +58,22 @@ new Vue({
                     });
                     break;
             }
+        },
+        /**
+         * 图片上传
+         */
+        uploadFile: function () {
+            let FormData = new FormData();
+            FormData.append("file", file.files[0]);
+            // 打开 axios 的凭证信息
+            let instance = axios.created({
+                withCredentials: true
+            })
+            axios.post("/upload/uploadFile.do", FormData).then(function (res) {
+                console.log(res.data);
+            }).catch(function (err) {
+                console.log(err);
+            })
         }
     }, created: function () {
         this.loadCategoryDate(0);
