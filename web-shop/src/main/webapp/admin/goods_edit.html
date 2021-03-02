@@ -151,7 +151,8 @@
                                         <img alt="" :src="item.url" width="100px" height="100px">
                                     </td>
                                     <td>
-                                        <button type="button" @click="deleteImg(item.url, index);" class="btn btn-default" title="删除"><i
+                                        <button type="button" @click="deleteImg(item.url, index);"
+                                                class="btn btn-default" title="删除"><i
                                                 class="fa fa-trash-o"></i> 删除
                                         </button>
                                     </td>
@@ -171,34 +172,28 @@
                         <p>
                         <div>
                             <div class="row data-type">
-                                <div>
-                                    <div class="col-md-2 title">屏幕尺寸</div>
+                                <div v-for="(specItem, index) in specList">
+                                    <div class="col-md-2 title">{{specItem.spec_name}}</div>
                                     <div class="col-md-10 data">
-									<span>
-										<input type="checkbox">4.0
-									</span>
-                                        <span>
-										<input type="checkbox">4.5
-									</span>
-                                        <span>
-										<input type="checkbox">5.0
+									<span v-for="(option, index) in specItem.specificationOptions">
+										<input type="checkbox" @click="updateSpecState($event, specItem.spec_name, option.optionName);">{{option.optionName}}
 									</span>
                                     </div>
                                 </div>
-                                <div>
-                                    <div class="col-md-2 title">网络制式</div>
-                                    <div class="col-md-10 data">
-									<span>
-										<input type="checkbox">2G
-									</span>
-                                        <span>
-										<input type="checkbox">3G
-									</span>
-                                        <span>
-										<input type="checkbox">4G
-									</span>
-                                    </div>
-                                </div>
+                                <!--                                <div>
+                                                                    <div class="col-md-2 title">网络制式</div>
+                                                                    <div class="col-md-10 data">
+                                                                    <span>
+                                                                        <input type="checkbox">2G
+                                                                    </span>
+                                                                        <span>
+                                                                        <input type="checkbox">3G
+                                                                    </span>
+                                                                        <span>
+                                                                        <input type="checkbox">4G
+                                                                    </span>
+                                                                    </div>
+                                                                </div>-->
                             </div>
                             <div class="row data-type">
                                 <table class="table table-bordered table-striped table-hover dataTable">
@@ -292,7 +287,8 @@
                                     </tr>
                                 </table>
                             </td>
-                        </tr>10
+                        </tr>
+                        10
                     </table>
                 </div>
                 <div class="modal-footer">

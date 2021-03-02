@@ -16,6 +16,15 @@ new Vue({
             url: ''
         },
         imageList: [],               /*图片上传列表*/
+        specList: [],                   /*规格选项*/
+        /*        specSelectedList: [{              /!*当前选择的规格选择*!/
+                    "specName": "选择颜色",
+                    "specOptions": ["秘境黑", "晨曦白"]
+                },{
+                    "specName": "选择版本",
+                    "specOptions": ["6G+128G", "12G+512G"]
+                }],*/
+        specSelectedList: [],           /*当前选择的规格选择*/
     }, methods: {
         /**
          * 加载商品分类下拉列表
@@ -118,6 +127,52 @@ new Vue({
                 console.log(err);
             });
 
+        },
+        /**
+         * 规格选择 checkbox 事件
+         * @param event checkbox 选择
+         * @param spec_name 规格姓名
+         * @param optionName 选项姓名
+         */
+        updateSpecState: function (event, spec_name, optionName) {
+            let specSelectedObj = this.searchPositionInListByKey(this.specSelectedList, "specName", spec_name);
+            // 不存在则说明已经有对应的值，需要添加到对应的位置
+            if (specSelectedObj != null) {
+                if (event.target.checked) {      /*选中状态*/
+                    // 已存在 key，勾选则添加到对应的 key
+                    // this.specSelectedList[spec_name].push(optionName);
+                    specSelectedObj.specOptions.push(optionName);
+                } else {
+                    // 存在，取消勾选则删除
+                    let idx = specSelectedObj.specOptions.indexOf(optionName);
+                    specSelectedObj.specOptions.splice(idx, 1);
+                    // 当 options 为空， 则删除整个节点
+                    if (specSelectedObj.specOptions.length === 0) {
+                        let idx = this.specSelectedList.indexOf(specSelectedObj);
+                        this.specSelectedList.splice(idx, 1);
+                    }
+                }
+            } else {
+                this.specSelectedList.push({
+                    "specName": spec_name,
+                    "specOptions": [optionName]
+                });
+            }
+            console.log(this.specSelectedList);
+        },
+        /**
+         * 给定集合中找出对应键值对，并返回该对象，不存在返回空
+         * @param list 给定集合
+         * @param key 键
+         * @param value 值
+         */
+        searchPositionInListByKey: function (list, key, value) {
+            for (let i = 0; i < list.length; i++) {
+                if (list[i][key] === value) {
+                    return list[i];
+                }
+            }
+            return null;
         }
     }, created: function () {
         this.loadCategoryDate(0);
@@ -137,7 +192,13 @@ new Vue({
                 console.log(err);
             });
             //TODO 加载规格与规格选项
-
+            axios.post("/temp/findBySpecWithId.do?id=" + newVal).then(function (res) {
+                res = res.data;
+                _this.specList = res.data;
+                console.log(_this.specList);
+            }).catch(function (err) {
+                console.log(err);
+            });
         }
     }
 })

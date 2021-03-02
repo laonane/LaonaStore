@@ -4,6 +4,7 @@ import wiki.laona.core.pojo.entity.PageResult;
 import wiki.laona.core.pojo.template.TypeTemplate;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 类型模板 service
@@ -46,4 +47,10 @@ public interface TypeTemplateService {
      */
     void updateTypeTemplate(TypeTemplate typeTemplate);
 
+    /**
+     * 根据 id 查询商品规格
+     * @param id 分类id
+     * @return 商品规格
+     */
+    List<Map> findBySpecWithId(Long id);
 }
