@@ -148,7 +148,7 @@
 		        #{price,jdbcType=DECIMAL}, #{typeTemplateId,jdbcType=BIGINT}, #{isEnableSpec,jdbcType=VARCHAR},
 		        #{isDelete,jdbcType=VARCHAR})
 	</insert>
-	<insert id="insertSelective" parameterType="wiki.laona.core.pojo.good.Goods">
+	<insert id="insertSelective" parameterType="wiki.laona.core.pojo.good.Goods" useGeneratedKeys="true" keyProperty="id">
 		insert into tb_goods
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">

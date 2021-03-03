@@ -25,7 +25,38 @@ new Vue({
                     "specOptions": ["6G+128G", "12G+512G"]
                 }],*/
         specSelectedList: [],           /*当前选择的规格选择*/
+        rowList: [],                    /*规格与规格选项的列表*/
+        isEnableSpec: false,                  /*是否启用规格*/
+        goodsEntity: {                   /*商品实体*/
+            goods: {},              // 商品信息
+            goodsDesc: {},          // 商品描述
+            itemList: []            // 商品条目
+        }
     }, methods: {
+        /**
+         * 生成规格和规格选项的列表
+         */
+        createRowList: function () {
+            let rowList = [
+                {spec: {}, price: 0, num: 999, status: '0', isDefault: '0'}
+            ]
+            for (let i = 0; i < this.specSelectedList.length; i++) {
+                let specObj = this.specSelectedList[i];
+                let specName = specObj.specName;
+                let specOptions = specObj.specOptions;
+                let newRowList = [];
+                for (let j = 0; j < rowList.length; j++) {
+                    let oldRow = rowList[j];
+                    for (let k = 0; k < specOptions.length; k++) {
+                        let newRow = JSON.parse(JSON.stringify(oldRow));
+                        newRow.spec[specName] = specOptions[k];
+                        newRowList.push(newRow);
+                    }
+                }
+                rowList = newRowList;
+            }
+            this.rowList = rowList;
+        },
         /**
          * 加载商品分类下拉列表
          */
@@ -158,7 +189,7 @@ new Vue({
                     "specOptions": [optionName]
                 });
             }
-            console.log(this.specSelectedList);
+            this.createRowList();
         },
         /**
          * 给定集合中找出对应键值对，并返回该对象，不存在返回空
@@ -173,6 +204,48 @@ new Vue({
                 }
             }
             return null;
+        },
+        /**
+         * 是否允许编辑规格
+         */
+        enableSpec: function (event) {
+            this.isEnableSpec = event.target.checked;
+        },
+        /**
+         * 保存商品信息
+         */
+        saveGoods: function () {
+            let _this = this;
+            console.log("来到了保存商品信息");
+            this.goodsEntity.goods.category1Id = this.categorySelected1;
+            this.goodsEntity.goods.category2Id = this.categorySelected2;
+            this.goodsEntity.goods.category3Id = this.categorySelected3;
+            this.goodsEntity.goods.typeTemplateId = this.typeId;
+            this.goodsEntity.goods.brandId = this.selectBrand;
+            this.goodsEntity.goods.isEnableSpec = this.isEnableSpec ? '1' : '0';
+
+            this.goodsEntity.goodsDesc.itemImages = this.imageList;
+            this.goodsEntity.goodsDesc.specificationItems = this.specSelectedList;
+            // 商品详情介绍 - 富文本
+            this.goodsEntity.goodsDesc.introduction = UE.getEditor('editor').getContent();
+
+            // 商品库存
+            this.goodsEntity.itemList = this.rowList;
+
+            if (this.selectBrand === -1) {
+                alert("请选择品牌");
+                return;
+            }
+
+            //发送请求
+            axios.post("/goods/add.do", _this.goodsEntity)
+                .then(function (res) {
+                    res = res.data;
+                    console.log(res.data);
+                    location.href = "goods.html";
+                }).catch(function (err) {
+                alert(err.data);
+            });
         }
     }, created: function () {
         this.loadCategoryDate(0);
