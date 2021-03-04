@@ -25,4 +25,12 @@ public interface ItemCategoryService {
      * @return 分类
      */
     ItemCat findItemCategoryById(Long id);
+
+
+    /**
+     * 查询所有分类信息
+     * @return 分类信息列表
+     */
+    List<ItemCat> getAllCategoryList();
+
 }

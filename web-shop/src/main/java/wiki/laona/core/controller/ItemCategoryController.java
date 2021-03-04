@@ -34,4 +34,12 @@ public class ItemCategoryController {
         ItemCat itemCatList = itemCategoryService.findItemCategoryById(id);
         return new Result(ResultCode.SUCCESS, itemCatList);
     }
+
+
+    @RequestMapping("/getAllCategoryList")
+    public Result getAllCategoryList() {
+        List<ItemCat> itemCatList = itemCategoryService.getAllCategoryList();
+        return new Result(ResultCode.SUCCESS, itemCatList);
+    }
+
 }

@@ -60,7 +60,7 @@ new Vue({
         /**
          * 加载商品分类下拉列表
          */
-        loadCategoryDate: function (pid) {
+        loadCategoryData: function (pid) {
             let _this = this;
             axios.post("/itemCate/getItemCategoryList.do?parentId=" + pid).then(function (res) {
                 res = res.data;
@@ -86,11 +86,11 @@ new Vue({
                     _this.categoryList3 = [];
                     _this.categorySelected3 = -1;
 
-                    _this.loadCategoryDate(_this.categorySelected1);
+                    _this.loadCategoryData(_this.categorySelected1);
                     _this.grade = 2;
                     break;
                 case 2:
-                    _this.loadCategoryDate(_this.categorySelected2);
+                    _this.loadCategoryData(_this.categorySelected2);
                     _this.grade = 3;
                     break;
                 case 3:
@@ -246,9 +246,92 @@ new Vue({
                 }).catch(function (err) {
                 alert(err.data);
             });
-        }
+        },
+        /**
+         * 获取别的页面传过来的参数
+         * @param name 参数名
+         * @returns {string|null} 参数值
+         * @constructor
+         */
+        GetQueryString: function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return (r[2]);
+            return null;
+        },
+        /**
+         * 规格与规格选项 checkbox 回显
+         * @param specName 规格名
+         * @param optionName 规格选项
+         */
+        checkSpecState: function (specName, optionName) {
+            // 查找是否有这个值
+            let specNameResult = this.searchPositionInListByKey(this.specSelectedList, "specName", specName);
+            // 不为空则判断是都有其他选项
+            if (specNameResult != null) {
+                return specNameResult.specOptions.indexOf(optionName) >= 0;
+            }
+            // 不存在此列表中
+            return false;
+        },
+
     }, created: function () {
-        this.loadCategoryDate(0);
+        // 加载下拉列表的分类信息
+        this.loadCategoryData(0);
+    },
+    mounted: function () {
+        let id = this.GetQueryString("id");
+        let _this = this;
+        if (id != null) {
+            // 根据id查询商品
+            axios.get("/goods/findGoodsEntityById.do?id=" + id)
+                .then(function (res) {
+                    // 回显商品信息
+                    _this.goodsEntity.goods = res.data.goods;
+                    // 商品描述信息
+                    _this.goodsEntity.goodsDesc = res.data.goodsDesc;
+                    // 富文本
+                    //初始化富文本编程器
+                    UE.getEditor('editor').ready(function () {
+                        // 回显 html
+                        UE.getEditor('editor').setContent(res.data.goodsDesc.introduction);
+                    });
+                    // 设置商品模板
+                    _this.typeId = res.data.goods.typeTemplateId;
+                    // 设置图片列表
+                    _this.imageList = JSON.parse(res.data.goodsDesc.itemImages);
+                    // 选中的规格选项
+                    _this.specSelectedList = JSON.parse(res.data.goodsDesc.specificationItems);
+                    // 库存信息
+                    _this.rowList = res.data.itemList;
+                    //   取出库存，把spec转成对象
+                    for (let i = 0; i < _this.rowList.length; i++) {
+                        _this.rowList[i].spec = JSON.parse(_this.rowList[i].spec);
+                    }
+                    // 是否禁用规格
+                    _this.isEnableSpec = (res.data.goods.isEnableSpec === '1');
+                    // 分类回显
+                    _this.categorySelected1 = res.data.goods.category1Id;
+                    // 请求二级分类
+                    if (res.data.goods.category1Id > 0) {
+                        _this.grade = 2;
+                        _this.loadCategoryData(_this.categorySelected1);
+                        _this.categorySelected2 = res.data.goods.category2Id;
+                    }
+                    // 请求三级分类
+                    if (_this.categorySelected2 > 0) {
+                        axios.post("/itemCate/getItemCategoryList.do?parentId=" + _this.categorySelected2).then(function (res) {
+                            _this.categoryList3 = res.data.data;
+                        }).catch(function (err) {
+                            console.log(err);
+                        });
+                        _this.categorySelected3 = res.data.goods.category3Id;
+                        console.log(_this.categorySelected1);
+                    }
+                }).catch(function (err) {
+                console.log(err);
+            });
+        }
     },
     /**
      * 监听值变化
@@ -261,6 +344,10 @@ new Vue({
             axios.post("/temp/getTempById.do?id=" + newVal).then(function (res) {
                 res = res.data;
                 _this.brandList = JSON.parse(res.data.brandIds);
+                // brandId不为空，则需要回显数据
+                if (_this.goodsEntity.goods.brandId != null) {
+                    _this.selectBrand = _this.goodsEntity.goods.brandId;
+                }
             }).catch(function (err) {
                 console.log(err);
             });

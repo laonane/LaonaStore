@@ -41,4 +41,9 @@ public class ItemCategoryCategoryServiceImpl implements ItemCategoryService {
     public ItemCat findItemCategoryById(Long id) {
         return itemCatDao.selectByPrimaryKey(id);
     }
+
+    @Override
+    public List<ItemCat> getAllCategoryList() {
+        return itemCatDao.selectByExample(null);
+    }
 }

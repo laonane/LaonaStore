@@ -2,6 +2,9 @@ package wiki.laona.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import wiki.laona.core.dao.good.BrandDao;
@@ -11,10 +14,14 @@ import wiki.laona.core.dao.item.ItemCatDao;
 import wiki.laona.core.dao.item.ItemDao;
 import wiki.laona.core.dao.seller.SellerDao;
 import wiki.laona.core.pojo.entity.GoodsEntity;
+import wiki.laona.core.pojo.entity.PageResult;
 import wiki.laona.core.pojo.good.Brand;
 import wiki.laona.core.pojo.good.Goods;
+import wiki.laona.core.pojo.good.GoodsDesc;
+import wiki.laona.core.pojo.good.GoodsQuery;
 import wiki.laona.core.pojo.item.Item;
 import wiki.laona.core.pojo.item.ItemCat;
+import wiki.laona.core.pojo.item.ItemQuery;
 import wiki.laona.core.pojo.seller.Seller;
 
 import java.math.BigDecimal;
@@ -55,7 +62,49 @@ public class GoodsServiceImpl implements GoodsService {
         // 保存商品描述
         goodsDescDao.insertSelective(goodsEntity.getGoodsDesc());
 
+        // 保存条目库存信息
         insertItem(goodsEntity, goodsEntity.getGoods());
+    }
+
+    @Override
+    public PageResult<Goods> findPage(Goods goods, Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        GoodsQuery query = new GoodsQuery();
+        GoodsQuery.Criteria criteria = query.createCriteria();
+        if (goods != null) {
+            if (!Strings.isNullOrEmpty(goods.getGoodsName())) {
+                criteria.andGoodsNameLike("%" + goods.getGoodsName() + "%");
+            }
+            if (!Strings.isNullOrEmpty(goods.getAuditStatus())) {
+                criteria.andAuditStatusEqualTo(goods.getAuditStatus());
+            }
+            if (!Strings.isNullOrEmpty(goods.getSellerId())) {
+                criteria.andSellerIdEqualTo(goods.getSellerId());
+            }
+        }
+        Page<Goods> goodsList = (Page<Goods>) goodsDao.selectByExample(query);
+        return new PageResult<>(goodsList.getTotal(), goodsList.getResult());
+    }
+
+    @Override
+    public GoodsEntity findGoodsEntityById(Long id) {
+        GoodsEntity goodsEntity = new GoodsEntity();
+        if(Objects.nonNull(id)) {
+            // 取出商品
+            Goods goods = goodsDao.selectByPrimaryKey(id);
+            // 取出商品描述
+            GoodsDesc goodsDesc = goodsDescDao.selectByPrimaryKey(id);
+            // 取出商品属性列表
+            ItemQuery itemQuery = new ItemQuery();
+            ItemQuery.Criteria criteria = itemQuery.createCriteria();
+            criteria.andGoodsIdEqualTo(id);
+            List<Item> itemList = itemDao.selectByExample(itemQuery);
+
+            goodsEntity.setGoods(goods);
+            goodsEntity.setGoodsDesc(goodsDesc);
+            goodsEntity.setItemList(itemList);
+        }
+        return goodsEntity;
     }
 
     /**

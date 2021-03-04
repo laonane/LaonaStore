@@ -1,6 +1,8 @@
 package wiki.laona.service;
 
 import wiki.laona.core.pojo.entity.GoodsEntity;
+import wiki.laona.core.pojo.entity.PageResult;
+import wiki.laona.core.pojo.good.Goods;
 
 /**
  * @description: goods 服务接口
@@ -14,4 +16,21 @@ public interface GoodsService {
      * @param goodsEntity 商品实体
      */
     void add(GoodsEntity goodsEntity);
+
+    /**
+     * 分页查询商品数据
+     *
+     * @param goods    商品信息
+     * @param page     当前页
+     * @param pageSize 每页多少条数据
+     * @return 商品数据列表
+     */
+    PageResult<Goods> findPage(Goods goods, Integer page, Integer pageSize);
+
+    /**
+     * 通过 id 查找商品
+     * @param id id
+     * @return 商品信息，没有就 null
+     */
+    GoodsEntity findGoodsEntityById(Long id);
 }
