@@ -30,7 +30,6 @@ public class GoodsController {
         try {
             // 获取当前登录用户 id
             String name = SecurityContextHolder.getContext().getAuthentication().getName();
-            System.out.println("name = " + name);
             // 设置 seller_id (等于用户id)
             goodsEntity.getGoods().setSellerId(name);
             goodsService.add(goodsEntity);
@@ -54,4 +53,32 @@ public class GoodsController {
         return goodsService.findGoodsEntityById(id);
     }
 
+    @RequestMapping("/updateGoodsEntryByGId")
+    public Result updateGoodsEntryByGId(@RequestBody GoodsEntity goodsEntity) {
+        try {
+            // 获取当前登录用户 id
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
+            String sellerId = goodsEntity.getGoods().getSellerId();
+            if (!name.equals(sellerId)) {
+                return new Result(ResultCode.FAILED, "没有权限进行更新操作");
+            }
+            // 设置 seller_id (等于用户id)
+            goodsEntity.getGoods().setSellerId(name);
+            goodsService.updateGoodsEntryByGId(goodsEntity);
+            return new Result(ResultCode.SUCCESS, "更新成功");
+        } catch (Exception e) {
+            return new Result(ResultCode.FAILED, "更新失败");
+        }
+    }
+
+    @RequestMapping("/deleteByIds")
+    public Result deleteByIds(Long[] ids) {
+        try {
+            goodsService.deleteByIds(ids);
+            return new Result(ResultCode.SUCCESS, "删除成功!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(ResultCode.FAILED, "删除失败!");
+        }
+    }
 }

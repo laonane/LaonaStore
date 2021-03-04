@@ -36,7 +36,7 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-default" title="新建"><i class="fa fa-file-o"></i> 新建
                         </button>
-                        <button type="button" class="btn btn-default" title="删除"><i class="fa fa-trash-o"></i> 删除
+                        <button type="button" class="btn btn-default" title="删除" @click="deleteGoods()"><i class="fa fa-trash-o"></i> 删除
                         </button>
                         <button type="button" class="btn btn-default" title="提交审核"><i class="fa fa-check"></i> 提交审核
                         </button>
@@ -83,7 +83,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="goodsItem in goodsList">
-                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"  @click="deleteSelection($event,goodsItem.id)"></td>
                     <td>{{goodsItem.id}}</td>
                     <td>{{goodsItem.goodsName}}</td>
                     <td>{{goodsItem.price}}</td>

@@ -63,7 +63,7 @@ public class GoodsServiceImpl implements GoodsService {
         goodsDescDao.insertSelective(goodsEntity.getGoodsDesc());
 
         // 保存条目库存信息
-        insertItem(goodsEntity, goodsEntity.getGoods());
+        insertItem(goodsEntity);
     }
 
     @Override
@@ -71,6 +71,7 @@ public class GoodsServiceImpl implements GoodsService {
         PageHelper.startPage(page, pageSize);
         GoodsQuery query = new GoodsQuery();
         GoodsQuery.Criteria criteria = query.createCriteria();
+
         if (goods != null) {
             if (!Strings.isNullOrEmpty(goods.getGoodsName())) {
                 criteria.andGoodsNameLike("%" + goods.getGoodsName() + "%");
@@ -82,6 +83,15 @@ public class GoodsServiceImpl implements GoodsService {
                 criteria.andSellerIdEqualTo(goods.getSellerId());
             }
         }
+
+/*        // 已删除商品就没必要在显示
+        criteria.andIsDeleteNotEqualTo("1");
+        GoodsQuery.Criteria criteria2 = query.createCriteria();
+        criteria2.andIsDeleteIsNull();
+        // 添加取出已删除商品不显示的条件
+        query.or(criteria2);*/
+        criteria.andIsDeleteIsNull();
+
         Page<Goods> goodsList = (Page<Goods>) goodsDao.selectByExample(query);
         return new PageResult<>(goodsList.getTotal(), goodsList.getResult());
     }
@@ -89,7 +99,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public GoodsEntity findGoodsEntityById(Long id) {
         GoodsEntity goodsEntity = new GoodsEntity();
-        if(Objects.nonNull(id)) {
+        if (Objects.nonNull(id)) {
             // 取出商品
             Goods goods = goodsDao.selectByPrimaryKey(id);
             // 取出商品描述
@@ -107,13 +117,49 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsEntity;
     }
 
+    @Override
+    public void updateGoodsEntryByGId(GoodsEntity goodsEntity) {
+        Goods goods = goodsEntity.getGoods();
+        GoodsDesc goodsDesc = goodsEntity.getGoodsDesc();
+        List<Item> itemList = goodsEntity.getItemList();
+
+        goodsDao.updateByPrimaryKeySelective(goods);
+        goodsDescDao.updateByPrimaryKeySelective(goodsDesc);
+        // 因为库存信息和商品是一对多的关系，需要先断开关系，在进行更新
+        ItemQuery itemQuery = new ItemQuery();
+        ItemQuery.Criteria criteria = itemQuery.createCriteria();
+        criteria.andGoodsIdEqualTo(goods.getId());
+        itemDao.deleteByExample(itemQuery);
+        // 更新商品库存
+        this.insertItem(goodsEntity);
+    }
+
+    @Override
+    public void deleteByIds(Long[] ids) {
+        System.out.println("ids = " + Arrays.toString(ids));
+        if (ids != null) {
+            for (Long id : ids) {
+                Goods goods = new Goods();
+                goods.setId(id);
+                goods.setIsDelete("1");
+                goodsDao.updateByPrimaryKeySelective(goods);
+            }
+            // Arrays.stream(ids).forEach(id->{
+            //     Goods goods = new Goods();
+            //     goods.setId(id);
+            //     goods.setIsDelete("1");
+            //     goodsDao.updateByPrimaryKeySelective(goods);
+            // });
+        }
+    }
+
     /**
-     * 插入 item 到数据库
+     * 插入库存信息到数据库
      *
      * @param goodsEntity 商品实体
-     * @param goods       商品
      */
-    private void insertItem(final GoodsEntity goodsEntity, final Goods goods) {
+    private void insertItem(final GoodsEntity goodsEntity) {
+        Goods goods = goodsEntity.getGoods();
         // 勾选了规格复选框，才做处理
         if ("1".equals(goods.getIsEnableSpec())) {
             if (Objects.nonNull(goodsEntity.getItemList())) {

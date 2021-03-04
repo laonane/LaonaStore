@@ -31,8 +31,14 @@ new Vue({
             goods: {},              // 商品信息
             goodsDesc: {},          // 商品描述
             itemList: []            // 商品条目
-        }
+        },
     }, methods: {
+        /**
+         * 新建商品
+         */
+        createGoods: function () {
+            // todo 新建商品按钮点击事件
+        },
         /**
          * 生成规格和规格选项的列表
          */
@@ -236,9 +242,17 @@ new Vue({
                 alert("请选择品牌");
                 return;
             }
-
-            //发送请求
-            axios.post("/goods/add.do", _this.goodsEntity)
+            // 获取当前 id ，如果有就更新，如果没有就进行添加操作
+            let id = this.GetQueryString("id");
+            let url = '';
+            if (id == null) {
+                // 添加操作
+                url = "/goods/add.do";
+            } else {
+                //  更新操作
+                url = "/goods/updateGoodsEntryByGId.do";
+            }
+            axios.post(url, _this.goodsEntity)
                 .then(function (res) {
                     res = res.data;
                     console.log(res.data);
@@ -274,7 +288,6 @@ new Vue({
             // 不存在此列表中
             return false;
         },
-
     }, created: function () {
         // 加载下拉列表的分类信息
         this.loadCategoryData(0);

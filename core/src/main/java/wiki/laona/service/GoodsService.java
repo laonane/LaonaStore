@@ -33,4 +33,16 @@ public interface GoodsService {
      * @return 商品信息，没有就 null
      */
     GoodsEntity findGoodsEntityById(Long id);
+
+    /**
+     * 更新商品实体信息
+     * @param goodsEntity 商品实体
+     */
+    void updateGoodsEntryByGId(GoodsEntity goodsEntity);
+
+    /**
+     * 根商品id列表引删除商品
+     * @param ids 商品id列表
+     */
+    void deleteByIds(Long[] ids);
 }

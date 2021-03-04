@@ -14,8 +14,42 @@ new Vue({
             2: "审核通过",
             3: "已驳回"
         },
+        selectIds:[],                /*记录选择了哪些记录的id*/
     },
     methods: {
+        /**
+         * 删除商品按钮事件点击
+         */
+        deleteGoods: function () {
+            let _this = this;
+            //使用qs插件 处理数组
+            axios.post('/goods/deleteByIds.do', Qs.stringify({ids: _this.selectIds}, {indices: false}))
+                .then(function (response) {
+                    _this.pageHandler(_this.page);
+                    _this.selectIds = [];
+                    alert("删除成功");
+                }).catch(function (reason) {
+                alert(reason.message);
+            })
+        },
+        /**
+         * 删除商品 checkbox 监听
+         * @param event checkbox点击
+         * @param id 商品id
+         */
+        deleteSelection: function (event, id) {
+            console.log(id);
+            // 复选框选中
+            if (event.target.checked) {
+                // 向数组中添加元素
+                this.selectIds.push(id);
+            } else {
+                // 从数组中移除
+                let idx = this.selectIds.indexOf(id);
+                this.selectIds.splice(idx, 1);
+            }
+            console.log(this.deletedIds);
+        },
         pageHandler: function (page) {
             let _this = this;
             this.page = page;
