@@ -79,7 +79,7 @@ public class GoodsServiceImpl implements GoodsService {
             if (!Strings.isNullOrEmpty(goods.getAuditStatus())) {
                 criteria.andAuditStatusEqualTo(goods.getAuditStatus());
             }
-            if (!Strings.isNullOrEmpty(goods.getSellerId())) {
+            if (!Strings.isNullOrEmpty(goods.getSellerId()) && !"admin".equals(goods.getSellerId())) {
                 criteria.andSellerIdEqualTo(goods.getSellerId());
             }
         }
@@ -144,12 +144,27 @@ public class GoodsServiceImpl implements GoodsService {
                 goods.setIsDelete("1");
                 goodsDao.updateByPrimaryKeySelective(goods);
             }
-            // Arrays.stream(ids).forEach(id->{
-            //     Goods goods = new Goods();
-            //     goods.setId(id);
-            //     goods.setIsDelete("1");
-            //     goodsDao.updateByPrimaryKeySelective(goods);
-            // });
+        }
+    }
+
+    @Override
+    public void updateStatusByIds(Long[] ids, String status) {
+        if (ids != null) {
+            for (Long id : ids) {
+                //1. 根据商品id修改商品对象状态码
+                Goods goods  = new Goods();
+                goods.setId(id);
+                goods.setAuditStatus(status);
+                goodsDao.updateByPrimaryKeySelective(goods);
+
+                //2. 根据商品id修改库存集合对象状态码
+                Item item = new Item();
+                item.setStatus(status);
+                ItemQuery query = new ItemQuery();
+                ItemQuery.Criteria criteria = query.createCriteria();
+                criteria.andGoodsIdEqualTo(id);
+                itemDao.updateByExampleSelective(item, query);
+            }
         }
     }
 

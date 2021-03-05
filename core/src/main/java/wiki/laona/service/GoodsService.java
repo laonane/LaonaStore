@@ -29,6 +29,7 @@ public interface GoodsService {
 
     /**
      * 通过 id 查找商品
+     *
      * @param id id
      * @return 商品信息，没有就 null
      */
@@ -36,13 +37,25 @@ public interface GoodsService {
 
     /**
      * 更新商品实体信息
+     *
      * @param goodsEntity 商品实体
      */
     void updateGoodsEntryByGId(GoodsEntity goodsEntity);
 
     /**
      * 根商品id列表引删除商品
+     *
      * @param ids 商品id列表
      */
     void deleteByIds(Long[] ids);
+
+    /**
+     * 更新状态。
+     * 2 -> 审核通过
+     * 3 -> 驳回
+     *
+     * @param ids    需要更新状态的 goods id 列表
+     * @param status 状态码
+     */
+    void updateStatusByIds(Long[] ids, String status);
 }
