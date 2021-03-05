@@ -121,7 +121,6 @@ public class GoodsServiceImpl implements GoodsService {
     public void updateGoodsEntryByGId(GoodsEntity goodsEntity) {
         Goods goods = goodsEntity.getGoods();
         GoodsDesc goodsDesc = goodsEntity.getGoodsDesc();
-        List<Item> itemList = goodsEntity.getItemList();
 
         goodsDao.updateByPrimaryKeySelective(goods);
         goodsDescDao.updateByPrimaryKeySelective(goodsDesc);
