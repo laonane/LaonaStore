@@ -10,6 +10,7 @@ import wiki.laona.core.pojo.ad.Content;
 import wiki.laona.core.pojo.ad.ContentQuery;
 import wiki.laona.core.pojo.entity.PageResult;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -63,5 +64,13 @@ public class ContentServiceImpl implements ContentService {
                 contentDao.deleteByPrimaryKey(id);
             }
         }
+    }
+
+    @Override
+    public List<Content> findByCategoryId(Long categoryId) {
+        ContentQuery contentQuery = new ContentQuery();
+        ContentQuery.Criteria criteria = contentQuery.createCriteria();
+        criteria.andCategoryIdEqualTo(categoryId);
+        return contentDao.selectByExample(contentQuery);
     }
 }

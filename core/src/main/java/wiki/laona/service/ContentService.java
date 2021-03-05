@@ -4,6 +4,8 @@ import wiki.laona.core.pojo.ad.Content;
 import wiki.laona.core.pojo.entity.PageResult;
 import wiki.laona.core.pojo.entity.Result;
 
+import java.util.List;
+
 /**
  * @description: 广告服务器接口
  * @author: laona
@@ -44,4 +46,11 @@ public interface ContentService {
      * @param ids 待删除广告列表
      */
     void delete(Long[] ids);
+
+    /**
+     * 根据 id 查找所有广告信息
+     * @param categoryId 分类id
+     * @return 广告信息列表
+     */
+    List<Content> findByCategoryId(Long categoryId);
 }
