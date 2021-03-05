@@ -138,7 +138,7 @@
                             <!-- 颜色图片 -->
                             <div class="btn-group">
                                 <a type="button" class="btn btn-default" title="新建" data-target="#uploadModal"
-                                        data-toggle="modal"><i class="fa fa-file-o"></i> 新建
+                                   data-toggle="modal"><i class="fa fa-file-o"></i> 新建
                                 </a>
                             </div>
                             <table class="table table-bordered table-striped table-hover dataTable">
@@ -171,7 +171,8 @@
                         <div class="row data-type">
                             <div class="col-md-2 title">是否启用规格</div>
                             <div class="col-md-10 data">
-                                <input type="checkbox" @click="enableSpec($event);" :checked="isEnableSpec"> {{isEnableSpec ? "启用" : "禁用"}}
+                                <input type="checkbox" @click="enableSpec($event);" :checked="isEnableSpec">
+                                {{isEnableSpec ? "启用" : "禁用"}}
                             </div>
                         </div>
                         <p>
@@ -181,7 +182,8 @@
                                     <div class="col-md-2 title">{{specItem.spec_name}}</div>
                                     <div class="col-md-10 data">
 									<span v-for="(option, index) in specItem.specificationOptions">
-										<input type="checkbox" :checked="checkSpecState(specItem.spec_name, option.optionName)"
+										<input type="checkbox"
+                                               :checked="checkSpecState(specItem.spec_name, option.optionName)"
                                                @click="updateSpecState($event, specItem.spec_name, option.optionName);">{{option.optionName}}
 									</span>
                                     </div>
@@ -208,8 +210,8 @@
                                         </td>
                                         <td><input class="form-control" v-model="row.price" placeholder="价格"></td>
                                         <td><input class="form-control" v-model="row.num" placeholder="库存数量"></td>
-                                        <td><input type="checkbox" v-model="row.status" ></td>
-                                        <td><input type="checkbox" v-model="row.isDefault" ></td>
+                                        <td><input type="checkbox" v-model="row.status"></td>
+                                        <td><input type="checkbox" v-model="row.isDefault"></td>
                                     </tr>
                                     </tbody>
                                 </table>

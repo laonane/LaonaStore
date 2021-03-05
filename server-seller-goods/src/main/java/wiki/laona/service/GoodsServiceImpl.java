@@ -83,13 +83,6 @@ public class GoodsServiceImpl implements GoodsService {
                 criteria.andSellerIdEqualTo(goods.getSellerId());
             }
         }
-
-/*        // 已删除商品就没必要在显示
-        criteria.andIsDeleteNotEqualTo("1");
-        GoodsQuery.Criteria criteria2 = query.createCriteria();
-        criteria2.andIsDeleteIsNull();
-        // 添加取出已删除商品不显示的条件
-        query.or(criteria2);*/
         criteria.andIsDeleteIsNull();
 
         Page<Goods> goodsList = (Page<Goods>) goodsDao.selectByExample(query);

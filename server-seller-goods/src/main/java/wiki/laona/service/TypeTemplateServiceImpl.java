@@ -65,7 +65,6 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 
     @Override
     public TypeTemplate getTemplateById(Long id) {
-        // typeTemplateDao.selectByPrimaryKey(id);
         return typeTemplateDao.selectByPrimaryKey(id);
     }
 

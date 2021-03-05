@@ -11,13 +11,15 @@ import wiki.laona.core.pojo.ad.ContentCategory;
 import wiki.laona.core.pojo.ad.ContentCategoryQuery;
 import wiki.laona.core.pojo.entity.PageResult;
 
+import java.util.List;
+
 /**
  * @description: 广告分类服务实现类
  * @author: laona
  * @create: 2021-03-05 12:46
  **/
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ContentCategoryServiceImpl implements ContentCategoryService {
 
     @Autowired
@@ -59,6 +61,11 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
                 contentCategoryDao.deleteByPrimaryKey(id);
             }
         }
+    }
+
+    @Override
+    public List<ContentCategory> findAll() {
+        return contentCategoryDao.selectByExample(null);
     }
 
 }

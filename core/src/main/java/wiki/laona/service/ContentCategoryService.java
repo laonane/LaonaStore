@@ -4,6 +4,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 import wiki.laona.core.pojo.ad.ContentCategory;
 import wiki.laona.core.pojo.entity.PageResult;
 
+import java.util.List;
+
 /**
  * @description: 广告分类服务接口
  * @author: laona
@@ -48,4 +50,11 @@ public interface ContentCategoryService {
      * @param ids 广告分类id列表
      */
     void delete(Long[] ids);
+
+    /**
+     * 查询所有广告分类列表
+     * @return 所有广告分类列表
+     */
+    List<ContentCategory> findAll();
+
 }

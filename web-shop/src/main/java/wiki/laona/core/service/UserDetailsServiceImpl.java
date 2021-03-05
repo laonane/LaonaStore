@@ -45,7 +45,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (seller != null && STATUS_ACTIVE.equals(seller.getStatus())) {
             // 返回用户名、密码、所有权限的用户信息集合
             // {noop} 表示不需要验证（不加密）
-            // return new User(username, "{noop}" + seller.getPassword(), authorities);
             return new User(username, seller.getPassword(), authorities);
         }
         return null;
