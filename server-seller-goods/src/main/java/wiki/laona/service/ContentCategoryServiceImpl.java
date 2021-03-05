@@ -21,7 +21,7 @@ import wiki.laona.core.pojo.entity.PageResult;
 public class ContentCategoryServiceImpl implements ContentCategoryService {
 
     @Autowired
-    private ContentCategoryDao categoryDao;
+    private ContentCategoryDao contentCategoryDao;
 
     @Override
     public PageResult<?> findPage(ContentCategory category, Integer page, Integer rows) {
@@ -33,8 +33,32 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
                 criteria.andNameLike("%" + category.getName() + "%");
             }
         }
-        Page<ContentCategory> categoryList = (Page<ContentCategory>) categoryDao.selectByExample(query);
+        Page<ContentCategory> categoryList = (Page<ContentCategory>) contentCategoryDao.selectByExample(query);
         return new PageResult<>(categoryList.getTotal(), categoryList.getResult());
+    }
+
+    @Override
+    public void add(ContentCategory category) {
+        contentCategoryDao.insertSelective(category);
+    }
+
+    @Override
+    public ContentCategory findOne(Long id) {
+        return contentCategoryDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void update(ContentCategory category) {
+        contentCategoryDao.updateByPrimaryKeySelective(category);
+    }
+
+    @Override
+    public void delete(Long[] ids) {
+        if (ids != null) {
+            for (Long id : ids) {
+                contentCategoryDao.deleteByPrimaryKey(id);
+            }
+        }
     }
 
 }
