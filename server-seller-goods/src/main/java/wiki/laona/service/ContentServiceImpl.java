@@ -4,14 +4,17 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import wiki.laona.core.dao.ad.ContentDao;
 import wiki.laona.core.pojo.ad.Content;
 import wiki.laona.core.pojo.ad.ContentQuery;
 import wiki.laona.core.pojo.entity.PageResult;
+import wiki.laona.utils.Constants;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
  * @description: 广告分类服务实现类
@@ -24,6 +27,10 @@ public class ContentServiceImpl implements ContentService {
 
     @Autowired
     private ContentDao contentDao;
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    private Logger logger = Logger.getLogger(ContentServiceImpl.class.getName());
 
     @Override
     public PageResult<Content> findPage(Content content, Integer page, Integer pageSize) {
@@ -72,5 +79,18 @@ public class ContentServiceImpl implements ContentService {
         ContentQuery.Criteria criteria = contentQuery.createCriteria();
         criteria.andCategoryIdEqualTo(categoryId);
         return contentDao.selectByExample(contentQuery);
+    }
+
+    @Override
+    public List<Content> findCategoryFromRedisById(Long categoryId) {
+        // 从 redis 中取出，有数据就返回，
+        List<Content> contentList =
+                (List<Content>) redisTemplate.boundHashOps(Constants.REDIS_CONTENT_BANNER_LIST).get(categoryId);
+        // 没有数据就到数据库中查询
+        if (Objects.isNull(contentList)) {
+            contentList = this.findByCategoryId(categoryId);
+            redisTemplate.boundHashOps(Constants.REDIS_CONTENT_BANNER_LIST).put(categoryId, contentList);
+        }
+        return contentList;
     }
 }

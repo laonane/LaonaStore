@@ -5,7 +5,7 @@ new Vue({
     },
     methods: {
         /**
-         * 通过分类id加载广告数据 -> 轮播图
+         * 通过分类id加载广告数据 -> banner 轮播图
          * @param categoryId
          */
         loadCategoryDataById: function (categoryId) {

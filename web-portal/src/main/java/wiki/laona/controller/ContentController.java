@@ -25,7 +25,7 @@ public class ContentController {
     @RequestMapping("/findByCategoryId")
     public Result findByCategoryId(Long categoryId) {
         try {
-            List<Content> contentList = contentService.findByCategoryId(categoryId);
+            List<Content> contentList = contentService.findCategoryFromRedisById(categoryId);
             return new Result(ResultCode.SUCCESS, contentList);
         } catch (Exception e) {
             e.printStackTrace();

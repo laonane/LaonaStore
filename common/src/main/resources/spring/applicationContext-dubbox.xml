@@ -9,5 +9,8 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<context:property-placeholder location="classpath*:properties/*.properties"/>
+	
+	<!-- zookeeper-->
 	<dubbo:registry protocol="zookeeper" address="${address}"/>
+	
 </beans>
