@@ -28,7 +28,7 @@ public class ContentServiceImpl implements ContentService {
     @Autowired
     private ContentDao contentDao;
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Content> redisTemplate;
 
     private Logger logger = Logger.getLogger(ContentServiceImpl.class.getName());
 
@@ -48,6 +48,8 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public void add(Content content) {
+        //  删除 redis 中的缓存数据，等待下次请求的时候重新加载
+        redisTemplate.boundHashOps(Constants.REDIS_CONTENT_BANNER_LIST).delete(content.getCategoryId());
         // 1. 将新广告添加到数据库中
         contentDao.insertSelective(content);
     }
@@ -59,6 +61,11 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public void update(Content content) {
+        // 先删除旧的数据
+        Content oldContent = contentDao.selectByPrimaryKey(content.getId());
+        redisTemplate.boundHashOps(Constants.REDIS_CONTENT_BANNER_LIST).delete(oldContent.getCategoryId());
+        // 再删除新的数据
+        redisTemplate.boundHashOps(Constants.REDIS_CONTENT_BANNER_LIST).delete(content.getCategoryId());
         //将新的广告对象更新到数据库中
         contentDao.updateByPrimaryKeySelective(content);
     }
@@ -67,6 +74,9 @@ public class ContentServiceImpl implements ContentService {
     public void delete(Long[] ids) {
         if (Objects.nonNull(ids)) {
             for (Long id : ids) {
+                //  删除 redis 中的缓存数据，等待下次请求的时候重新加载
+                Content content = contentDao.selectByPrimaryKey(id);
+                redisTemplate.boundHashOps(Constants.REDIS_CONTENT_BANNER_LIST).delete(content.getCategoryId());
                 //3. 根据广告id删除数据库中的广告数据
                 contentDao.deleteByPrimaryKey(id);
             }

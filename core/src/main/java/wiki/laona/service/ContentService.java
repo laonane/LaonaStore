@@ -47,7 +47,7 @@ public interface ContentService {
     /**
      * 删除广告
      *
-     * @param ids 待删除广告列表
+     * @param ids 待删除广告id列表
      */
     void delete(Long[] ids);
 
