@@ -17,6 +17,7 @@
 		<module>dao</module>
 		<module>web-shop</module>
 		<module>web-portal</module>
+		<module>solr-util</module>
 	</modules>
 	
 	<!-- 集中定义依赖版本号 -->
@@ -245,7 +246,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.10</version>
+				<version>1.18.18</version>
 			</dependency>
 			
 			<!-- jackson json -->
