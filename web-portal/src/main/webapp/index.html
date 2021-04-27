@@ -11,93 +11,93 @@
 </head>
 
 <body>
-<!--页面顶部-->
-<div id="nav-bottom" style="background: white;">
-    <!--顶部-->
-    <div class="nav-top">
-        <div class="top">
-            <div class="py-container">
-                <div class="shortcut">
-                    <ul class="fl">
-                        <li class="f-item">您好！</li>
-                        <li class="f-item"> 请<a href="login.html" target="_blank" style="padding-left: 10px;">登录</a>　
-                            <span><a href="register.html" target="_blank">免费注册</a></span>
-                        </li>
-                    </ul>
-                    <ul class="fr">
-                        <li class="f-item">我的订单</li>
-                        <li class="f-item space"></li>
-                        <li class="f-item">我的老衲</li>
-                        <li class="f-item space"></li>
-                        <li class="f-item">老衲会员</li>
-                        <li class="f-item space"></li>
-                        <li class="f-item">企业采购</li>
-                        <li class="f-item space"></li>
-                        <li class="f-item">客户服务</li>
-                        <li class="f-item space"></li>
-                        <li class="f-item">客户服务</li>
-                        <li class="f-item space"></li>
-                        <li class="f-item">网站导航</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!--头部-->
-        <div class="header">
-            <div class="py-container" style="background: white;">
-                <div class="yui3-g Logo">
-                    <div class="yui3-u Left logoArea" style="padding-top: 30px;">
-                        <img src="img/logo.png" width="60" height="60" alt="" style="float:left; margin-right: 10px;">
-                        <div style="font-size: 28px; color: #2b2b2b; margin-top: 18px;">老衲商城</div>
-                    </div>
-                    <div class="yui3-u Center searchArea">
-                        <div class="search">
-                            <form action="" class="sui-form form-inline">
-                                <div class="input-append">
-                                    <input type="text" id="autocomplete" type="text" class="input-error input-xxlarge"/>
-                                    <a class="sui-btn btn-xlarge btn-danger" href="search.html">搜索</a>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="hotwords">
-                            <ul>
-                                <li class="f-item">运动清凉节</li>
-                                <li class="f-item">数码家电</li>
-                                <li class="f-item">每100-50</li>
-                                <li class="f-item">家具直降</li>
-                                <li class="f-item">AMD新品</li>
-                                <li class="f-item">海尔巅峰</li>
-                                <li class="f-item">清凉家装</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <img src="img/gifgoods.gif" alt=""
-                         style="display: inline; position: absolute;right: 340px; top: 50px;">
-                </div>
-                <div class="yui3-g NavList" style="background: white;">
-                    <div class="yui3-u Left all-sort">
-                        <h4>全部商品分类</h4>
-                    </div>
-                    <div class="yui3-u Center navArea">
-                        <ul class="nav">
-                            <li class="f-item">限时抢购</li>
-                            <li class="f-item">优惠券</li>
-                            <li class="f-item">PLUS会员</li>
-                            <li class="f-item">闪购</li>
-                            <li class="f-item">拍卖</li>
-                            <li class="f-item">海囤全球</li>
-                            <li class="f-item">老衲生鲜</li>
-                            <li class="f-item">老衲时尚</li>
+<div id="root">
+    <!--页面顶部-->
+    <div id="nav-bottom" style="background: white;">
+        <!--顶部-->
+        <div class="nav-top">
+            <div class="top">
+                <div class="py-container">
+                    <div class="shortcut">
+                        <ul class="fl">
+                            <li class="f-item">您好！</li>
+                            <li class="f-item"> 请<a href="login.html" target="_blank" style="padding-left: 10px;">登录</a>　
+                                <span><a href="register.html" target="_blank">免费注册</a></span>
+                            </li>
+                        </ul>
+                        <ul class="fr">
+                            <li class="f-item">我的订单</li>
+                            <li class="f-item space"></li>
+                            <li class="f-item">我的老衲</li>
+                            <li class="f-item space"></li>
+                            <li class="f-item">老衲会员</li>
+                            <li class="f-item space"></li>
+                            <li class="f-item">企业采购</li>
+                            <li class="f-item space"></li>
+                            <li class="f-item">客户服务</li>
+                            <li class="f-item space"></li>
+                            <li class="f-item">客户服务</li>
+                            <li class="f-item space"></li>
+                            <li class="f-item">网站导航</li>
                         </ul>
                     </div>
-                    <div class="yui3-u Right" style="background: white;"></div>
+                </div>
+            </div>
+            <!--头部-->
+            <div class="header">
+                <div class="py-container" style="background: white;">
+                    <div class="yui3-g Logo">
+                        <div class="yui3-u Left logoArea" style="padding-top: 30px;">
+                            <img src="img/logo.png" width="60" height="60" alt="" style="float:left; margin-right: 10px;">
+                            <div style="font-size: 28px; color: #2b2b2b; margin-top: 18px;">老衲商城</div>
+                        </div>
+                        <div class="yui3-u Center searchArea">
+                            <div class="search">
+                                <form action="" class="sui-form form-inline">
+                                    <div class="input-append">
+                                        <input type="text" v-model="searchContent" id="autocomplete"
+                                               class="input-error input-xxlarge"/>
+                                        <a class="sui-btn btn-xlarge btn-danger" :href='"search.html?sc=" + searchContent'>搜索</a>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="hotwords">
+                                <ul>
+                                    <li class="f-item">运动清凉节</li>
+                                    <li class="f-item">数码家电</li>
+                                    <li class="f-item">每100-50</li>
+                                    <li class="f-item">家具直降</li>
+                                    <li class="f-item">AMD新品</li>
+                                    <li class="f-item">海尔巅峰</li>
+                                    <li class="f-item">清凉家装</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <img src="img/gifgoods.gif" alt=""
+                             style="display: inline; position: absolute;right: 340px; top: 50px;">
+                    </div>
+                    <div class="yui3-g NavList" style="background: white;">
+                        <div class="yui3-u Left all-sort">
+                            <h4>全部商品分类</h4>
+                        </div>
+                        <div class="yui3-u Center navArea">
+                            <ul class="nav">
+                                <li class="f-item">限时抢购</li>
+                                <li class="f-item">优惠券</li>
+                                <li class="f-item">PLUS会员</li>
+                                <li class="f-item">闪购</li>
+                                <li class="f-item">拍卖</li>
+                                <li class="f-item">海囤全球</li>
+                                <li class="f-item">老衲生鲜</li>
+                                <li class="f-item">老衲时尚</li>
+                            </ul>
+                        </div>
+                        <div class="yui3-u Right" style="background: white;"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div id="root">
-
     <!--列表-->
     <div class="sort">
         <div class="py-container" style="background: white;">
@@ -112,12 +112,14 @@
                                         <dt><a href="">电子书1</a></dt>
                                         <dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a
                                                 href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a
-                                                href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em>
+                                                href="">文学</a></em><em><a href="">经管</a></em><em><a
+                                                href="">畅读VIP</a></em>
                                         </dd>
                                     </dl>
                                     <dl class="fore2">
                                         <dt><a href="">数字音乐</a></dt>
-                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a
+                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a
+                                                href="">摇滚说唱</a></em><em><a
                                                 href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a
                                                 href="">有声读物</a></em></dd>
                                     </dl>
@@ -134,7 +136,8 @@
                                     <dl class="fore5">
                                         <dt>人文社科</dt>
                                         <dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a
-                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a
+                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a
+                                                href="">哲学/宗教</a></em><em><a
                                                 href="">社会科学</a></em></dd>
                                     </dl>
                                     <dl class="fore6">
@@ -147,7 +150,8 @@
                                         <dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a
                                                 href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a
                                                 href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a
-                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a
+                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a
+                                                href="">动漫/幽默</a></em><em><a
                                                 href="">体育/运动</a></em></dd>
                                     </dl>
                                     <dl class="fore8">
@@ -160,7 +164,8 @@
                                     <dl class="fore9">
                                         <dt>少儿</dt>
                                         <dd><em><a href="">少儿</a></em><em><a href="">0-2岁</a></em><em><a
-                                                href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a href="">11-14岁</a></em>
+                                                href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a
+                                                href="">11-14岁</a></em>
                                         </dd>
                                     </dl>
                                 </div>
@@ -174,12 +179,14 @@
                                         <dt><a href="">电子书2</a></dt>
                                         <dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a
                                                 href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a
-                                                href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em>
+                                                href="">文学</a></em><em><a href="">经管</a></em><em><a
+                                                href="">畅读VIP</a></em>
                                         </dd>
                                     </dl>
                                     <dl class="fore2">
                                         <dt><a href="">数字音乐</a></dt>
-                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a
+                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a
+                                                href="">摇滚说唱</a></em><em><a
                                                 href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a
                                                 href="">有声读物</a></em></dd>
                                     </dl>
@@ -196,7 +203,8 @@
                                     <dl class="fore5">
                                         <dt>人文社科</dt>
                                         <dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a
-                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a
+                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a
+                                                href="">哲学/宗教</a></em><em><a
                                                 href="">社会科学</a></em></dd>
                                     </dl>
                                 </div>
@@ -210,12 +218,14 @@
                                         <dt><a href="">电子书3</a></dt>
                                         <dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a
                                                 href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a
-                                                href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em>
+                                                href="">文学</a></em><em><a href="">经管</a></em><em><a
+                                                href="">畅读VIP</a></em>
                                         </dd>
                                     </dl>
                                     <dl class="fore2">
                                         <dt><a href="">数字音乐</a></dt>
-                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a
+                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a
+                                                href="">摇滚说唱</a></em><em><a
                                                 href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a
                                                 href="">有声读物</a></em></dd>
                                     </dl>
@@ -232,7 +242,8 @@
                                     <dl class="fore5">
                                         <dt>人文社科</dt>
                                         <dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a
-                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a
+                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a
+                                                href="">哲学/宗教</a></em><em><a
                                                 href="">社会科学</a></em></dd>
                                     </dl>
                                     <dl class="fore6">
@@ -245,7 +256,8 @@
                                         <dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a
                                                 href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a
                                                 href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a
-                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a
+                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a
+                                                href="">动漫/幽默</a></em><em><a
                                                 href="">体育/运动</a></em></dd>
                                     </dl>
                                     <dl class="fore8">
@@ -258,7 +270,8 @@
                                     <dl class="fore9">
                                         <dt>少儿</dt>
                                         <dd><em><a href="">少儿</a></em><em><a href="">0-2岁</a></em><em><a
-                                                href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a href="">11-14岁</a></em>
+                                                href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a
+                                                href="">11-14岁</a></em>
                                         </dd>
                                     </dl>
                                     <dl class="fore10">
@@ -268,7 +281,8 @@
                                     </dl>
                                     <dl class="fore11">
                                         <dt>其它</dt>
-                                        <dd><em><a href="">英文原版书</a></em><em><a href="">港台图书</a></em><em><a href="">工具书</a></em><em><a
+                                        <dd><em><a href="">英文原版书</a></em><em><a href="">港台图书</a></em><em><a
+                                                href="">工具书</a></em><em><a
                                                 href="">套装书</a></em><em><a href="">杂志/期刊</a></em></dd>
                                     </dl>
                                 </div>
@@ -282,12 +296,14 @@
                                         <dt><a href="">电子书4</a></dt>
                                         <dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a
                                                 href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a
-                                                href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em>
+                                                href="">文学</a></em><em><a href="">经管</a></em><em><a
+                                                href="">畅读VIP</a></em>
                                         </dd>
                                     </dl>
                                     <dl class="fore2">
                                         <dt><a href="">数字音乐</a></dt>
-                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a
+                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a
+                                                href="">摇滚说唱</a></em><em><a
                                                 href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a
                                                 href="">有声读物</a></em></dd>
                                     </dl>
@@ -304,7 +320,8 @@
                                     <dl class="fore5">
                                         <dt>人文社科</dt>
                                         <dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a
-                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a
+                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a
+                                                href="">哲学/宗教</a></em><em><a
                                                 href="">社会科学</a></em></dd>
                                     </dl>
                                     <dl class="fore6">
@@ -317,7 +334,8 @@
                                         <dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a
                                                 href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a
                                                 href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a
-                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a
+                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a
+                                                href="">动漫/幽默</a></em><em><a
                                                 href="">体育/运动</a></em></dd>
                                     </dl>
                                     <dl class="fore8">
@@ -330,7 +348,8 @@
                                     <dl class="fore9">
                                         <dt>少儿</dt>
                                         <dd><em><a href="">少儿</a></em><em><a href="">0-2岁</a></em><em><a
-                                                href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a href="">11-14岁</a></em>
+                                                href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a
+                                                href="">11-14岁</a></em>
                                         </dd>
                                     </dl>
                                 </div>
@@ -344,12 +363,14 @@
                                         <dt><a href="">电子书5</a></dt>
                                         <dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a
                                                 href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a
-                                                href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em>
+                                                href="">文学</a></em><em><a href="">经管</a></em><em><a
+                                                href="">畅读VIP</a></em>
                                         </dd>
                                     </dl>
                                     <dl class="fore2">
                                         <dt><a href="">数字音乐</a></dt>
-                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a
+                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a
+                                                href="">摇滚说唱</a></em><em><a
                                                 href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a
                                                 href="">有声读物</a></em></dd>
                                     </dl>
@@ -366,7 +387,8 @@
                                     <dl class="fore5">
                                         <dt>人文社科</dt>
                                         <dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a
-                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a
+                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a
+                                                href="">哲学/宗教</a></em><em><a
                                                 href="">社会科学</a></em></dd>
                                     </dl>
                                     <dl class="fore6">
@@ -379,7 +401,8 @@
                                         <dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a
                                                 href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a
                                                 href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a
-                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a
+                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a
+                                                href="">动漫/幽默</a></em><em><a
                                                 href="">体育/运动</a></em></dd>
                                     </dl>
                                     <dl class="fore8">
@@ -404,7 +427,8 @@
                                     </dl>
                                     <dl class="fore2">
                                         <dt><a href="">数字音乐</a></dt>
-                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a
+                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a
+                                                href="">摇滚说唱</a></em><em><a
                                                 href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a
                                                 href="">有声读物</a></em></dd>
                                     </dl>
@@ -421,7 +445,8 @@
                                     <dl class="fore5">
                                         <dt>人文社科</dt>
                                         <dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a
-                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a
+                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a
+                                                href="">哲学/宗教</a></em><em><a
                                                 href="">社会科学</a></em></dd>
                                     </dl>
                                     <dl class="fore6">
@@ -434,7 +459,8 @@
                                         <dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a
                                                 href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a
                                                 href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a
-                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a
+                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a
+                                                href="">动漫/幽默</a></em><em><a
                                                 href="">体育/运动</a></em></dd>
                                     </dl>
                                 </div>
@@ -448,12 +474,14 @@
                                         <dt><a href="">电子书6</a></dt>
                                         <dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a
                                                 href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a
-                                                href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em>
+                                                href="">文学</a></em><em><a href="">经管</a></em><em><a
+                                                href="">畅读VIP</a></em>
                                         </dd>
                                     </dl>
                                     <dl class="fore2">
                                         <dt><a href="">数字音乐</a></dt>
-                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a
+                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a
+                                                href="">摇滚说唱</a></em><em><a
                                                 href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a
                                                 href="">有声读物</a></em></dd>
                                     </dl>
@@ -470,7 +498,8 @@
                                     <dl class="fore5">
                                         <dt>人文社科</dt>
                                         <dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a
-                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a
+                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a
+                                                href="">哲学/宗教</a></em><em><a
                                                 href="">社会科学</a></em></dd>
                                     </dl>
                                     <dl class="fore6">
@@ -483,7 +512,8 @@
                                         <dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a
                                                 href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a
                                                 href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a
-                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a
+                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a
+                                                href="">动漫/幽默</a></em><em><a
                                                 href="">体育/运动</a></em></dd>
                                     </dl>
                                     <dl class="fore8">
@@ -496,7 +526,8 @@
                                     <dl class="fore9">
                                         <dt>少儿</dt>
                                         <dd><em><a href="">少儿</a></em><em><a href="">0-2岁</a></em><em><a
-                                                href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a href="">11-14岁</a></em>
+                                                href="">3-6岁</a></em><em><a href="">7-10岁</a></em><em><a
+                                                href="">11-14岁</a></em>
                                         </dd>
                                     </dl>
                                     <dl class="fore10">
@@ -506,7 +537,8 @@
                                     </dl>
                                     <dl class="fore11">
                                         <dt>其它</dt>
-                                        <dd><em><a href="">英文原版书</a></em><em><a href="">港台图书</a></em><em><a href="">工具书</a></em><em><a
+                                        <dd><em><a href="">英文原版书</a></em><em><a href="">港台图书</a></em><em><a
+                                                href="">工具书</a></em><em><a
                                                 href="">套装书</a></em><em><a href="">杂志/期刊</a></em></dd>
                                     </dl>
                                 </div>
@@ -520,12 +552,14 @@
                                         <dt><a href="">电子书7</a></dt>
                                         <dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a
                                                 href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a
-                                                href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em>
+                                                href="">文学</a></em><em><a href="">经管</a></em><em><a
+                                                href="">畅读VIP</a></em>
                                         </dd>
                                     </dl>
                                     <dl class="fore2">
                                         <dt><a href="">数字音乐</a></dt>
-                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a
+                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a
+                                                href="">摇滚说唱</a></em><em><a
                                                 href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a
                                                 href="">有声读物</a></em></dd>
                                     </dl>
@@ -565,12 +599,14 @@
                                         <dt><a href="">电子书8</a></dt>
                                         <dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a
                                                 href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a
-                                                href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em>
+                                                href="">文学</a></em><em><a href="">经管</a></em><em><a
+                                                href="">畅读VIP</a></em>
                                         </dd>
                                     </dl>
                                     <dl class="fore2">
                                         <dt><a href="">数字音乐</a></dt>
-                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a href="">摇滚说唱</a></em><em><a
+                                        <dd><em><a href="">通俗流行</a></em><em><a href="">古典音乐</a></em><em><a
+                                                href="">摇滚说唱</a></em><em><a
                                                 href="">爵士蓝调</a></em><em><a href="">乡村民谣</a></em><em><a
                                                 href="">有声读物</a></em></dd>
                                     </dl>
@@ -587,7 +623,8 @@
                                     <dl class="fore5">
                                         <dt>人文社科</dt>
                                         <dd><em><a href="">历史</a></em><em><a href="">心理学</a></em><em><a
-                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a href="">哲学/宗教</a></em><em><a
+                                                href="">政治/军事</a></em><em><a href="">国学/古籍</a></em><em><a
+                                                href="">哲学/宗教</a></em><em><a
                                                 href="">社会科学</a></em></dd>
                                     </dl>
                                     <dl class="fore6">
@@ -600,7 +637,8 @@
                                         <dd><em><a href="">家庭与育儿</a></em><em><a href="">旅游/地图</a></em><em><a
                                                 href="">烹饪/美食</a></em><em><a href="">时尚/美妆</a></em><em><a
                                                 href="">家居</a></em><em><a href="">婚恋与两性</a></em><em><a
-                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a href="">动漫/幽默</a></em><em><a
+                                                href="">娱乐/休闲</a></em><em><a href="">健身与保健</a></em><em><a
+                                                href="">动漫/幽默</a></em><em><a
                                                 href="">体育/运动</a></em></dd>
                                     </dl>
                                     <dl class="fore8">
@@ -647,7 +685,7 @@
                         <div class="carousel-inner">
                             <div :class="index==0?'active':''" class="item" v-for="(item,index) in contentList[1]">
                                 <a :href="item.url">
-                                    <img :src="item.pic"  />
+                                    <img :src="item.pic"/>
                                 </a>
                             </div>
                         </div>
@@ -777,7 +815,8 @@
                             <div class="lazyimg lazyimg_loaded sk_item_img">
                                 <img src="img/skill2.webp" class="lazyimg_img"/>
                             </div>
-                            <p class="sk_item_name">联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄窄边框笔记本电脑（i7-8550U 8G 128GSSD+1T 2G独显
+                            <p class="sk_item_name">联想ThinkPad 翼480（1ACD）英特尔酷睿i7 14英寸轻薄窄边框笔记本电脑（i7-8550U 8G 128GSSD+1T
+                                2G独显
                                 高清显示屏）冰原银</p>
                             <div class="sk_item_price">
                                 <span class="mod_price sk_item_price_new"><i>&yen;</i><span>5769.00</span></span>
@@ -806,7 +845,8 @@
                 <li class="yui3-u-5-24">
                     <div data-index="11" class="slider_item sk_item sk_item_12 slider_active"
                          style="float: left; width: 200px;">
-                        <a class="sk_item_lk" href="//miaosha.jd.com/#12600018" target="_blank" title="梦的解析（2019精装珍藏版 无删节！）"
+                        <a class="sk_item_lk" href="//miaosha.jd.com/#12600018" target="_blank"
+                           title="梦的解析（2019精装珍藏版 无删节！）"
                            clstag="h|keycount|core|seckill_b12">
                             <div class="lazyimg lazyimg_loaded sk_item_img">
                                 <img src="img/skill4.webp" class="lazyimg_img"/>
@@ -988,14 +1028,16 @@
                                          class="lazyimg_img"/>
                                 </div>
                             </a>
-                            <a class="sort_small" href="//mall.jd.com/index-1000004065.html" target="_blank" title="oppo"
+                            <a class="sort_small" href="//mall.jd.com/index-1000004065.html" target="_blank"
+                               title="oppo"
                                clstag="h|keycount|tech|chan#01_e06">
                                 <div class="lazyimg lazyimg_loaded sort_small_img">
                                     <img src="//img30.360buyimg.com/babel/s80x999_jfs/t1/16815/31/10458/9243/5c85c7d8E74fbf9d2/51cbc5b8a94ab9e8.jpg!q90"
                                          class="lazyimg_img"/>
                                 </div>
                             </a>
-                            <a class="sort_small" href="//mall.jd.com/index-1000085868.html" target="_blank" title="vivo"
+                            <a class="sort_small" href="//mall.jd.com/index-1000085868.html" target="_blank"
+                               title="vivo"
                                clstag="h|keycount|tech|chan#01_e07">
                                 <div class="lazyimg lazyimg_loaded sort_small_img">
                                     <img src="//img12.360buyimg.com/babel/s80x999_jfs/t1/26867/11/4692/3808/5c34521bEb0845a91/bbb5bcb35febccd3.jpg!q90"
@@ -1016,14 +1058,16 @@
                                          class="lazyimg_img"/>
                                 </div>
                             </a>
-                            <a class="sort_small" href="//mall.jd.com/index-1000004082.html" target="_blank" title="moto"
+                            <a class="sort_small" href="//mall.jd.com/index-1000004082.html" target="_blank"
+                               title="moto"
                                clstag="h|keycount|tech|chan#01_e10">
                                 <div class="lazyimg lazyimg_loaded sort_small_img">
                                     <img src="//img11.360buyimg.com/babel/s80x999_jfs/t17878/225/910089021/3580/6c91b988/5ab22721N04fc4aeb.jpg!q90"
                                          class="lazyimg_img"/>
                                 </div>
                             </a>
-                            <a class="sort_small" href="//mall.jd.com/index-1000094141.html" target="_blank" title="sony"
+                            <a class="sort_small" href="//mall.jd.com/index-1000094141.html" target="_blank"
+                               title="sony"
                                clstag="h|keycount|tech|chan#01_e11">
                                 <div class="lazyimg lazyimg_loaded sort_small_img">
                                     <img src="//img13.360buyimg.com/babel/s80x999_jfs/t17479/312/902698708/3830/c6cf8c2d/5aaf7e1cN865cbce5.jpg!q90"
@@ -1099,7 +1143,8 @@
                    href="//hellojoy.jd.com/?itemid=17736&amp;babelChannel=1500733&amp;activityId=478LEo67Dj51ow3zPbmj8xyVh3dm&amp;linkIds=100005702210,100005502446,100003060627&amp;source=02"
                    target="_blank" clstag="h|keycount|tech|joy#05_b01" title="教你拍照">
                     <div class="treasure_scene_hd">
-                        <h4 class="treasure_scene_tit">教你拍照 &middot; <span class="treasure_scene_subtit">会拍照的男朋友</span></h4>
+                        <h4 class="treasure_scene_tit">教你拍照 &middot; <span class="treasure_scene_subtit">会拍照的男朋友</span>
+                        </h4>
                     </div>
                     <div class="treasure_scene_bd">
                         <ul class="treasure_list">
@@ -1123,7 +1168,8 @@
                    href="//hellojoy.jd.com/?itemid=4318&amp;babelChannel=1500733&amp;activityId=S9k5CRP8Fo4MNRtsCutHcRoj8qi&amp;linkIds=8314939,100000020359,100003449769&amp;source=02"
                    target="_blank" clstag="h|keycount|tech|joy#05_b02" title="王者荣耀">
                     <div class="treasure_scene_hd">
-                        <h4 class="treasure_scene_tit">王者荣耀 &middot; <span class="treasure_scene_subtit">最强王者</span></h4>
+                        <h4 class="treasure_scene_tit">王者荣耀 &middot; <span class="treasure_scene_subtit">最强王者</span>
+                        </h4>
                     </div>
                     <div class="treasure_scene_bd">
                         <ul class="treasure_list">

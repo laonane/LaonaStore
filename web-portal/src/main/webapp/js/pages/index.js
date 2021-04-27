@@ -2,6 +2,7 @@ new Vue({
     el: "#root",
     data: {
         contentList: [],             /*广告列表*/
+        searchContent: '',              /*搜索内容*/
     },
     methods: {
         /**
@@ -177,8 +178,8 @@ arartta({
 
 function rotateElement(element, angle) {
     var rotate = 'rotate(' + angle + 'deg)';
-    if (element.css('MozTransform') != undefined)
+    if (element.css('MozTransform') !== undefined)
         element.css('MozTransform', rotate);
-    else if (element.css('WebkitTransform') != undefined)
+    else if (element.css('WebkitTransform') !== undefined)
         element.css('WebkitTransform', rotate);
 }

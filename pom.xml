@@ -18,6 +18,7 @@
 		<module>web-shop</module>
 		<module>web-portal</module>
 		<module>solr-util</module>
+		<module>server-search</module>
 	</modules>
 	
 	<!-- 集中定义依赖版本号 -->
